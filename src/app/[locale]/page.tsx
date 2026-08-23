@@ -135,6 +135,25 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
+      {/* New-player pitfalls — what actually slows players down (creator video backed) */}
+      <section className="mx-auto max-w-7xl px-4 py-12">
+        <SectionHeader
+          eyebrow={isEs ? "Por qué la gente se atasca" : "Where players get stuck"}
+          title={isEs ? "Errores comunes de los nuevos jugadores" : "Common new-player mistakes"}
+          copy={isEs ? "Vistas en videos de jugadores y en la economía del juego; no son teoría de manual." : "Seen in player videos and in the game's economy; this is not manual theory."}
+        />
+        <div className="mt-6 grid gap-3 text-sm text-white/75">
+          <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+            <strong className="text-white">{isEs ? "Ignorar a los trabajadores = pierdes producción offline" : "Ignoring workers = lost offline production"}</strong>
+            <p className="mt-1 text-white/65">{isEs ? "Varios videos de creadores (yt-dlp verificado) confirmaron: tus trabajadores siguen cortando césped aunque estés fuera. Los nuevos que solo compran cuchillas y no contratan trabajadores dejan dinero sobre la mesa cada minuto offline." : "Multiple creator videos (yt-dlp-verified) confirm: your workers keep cutting grass even while you're offline. New players who only buy blades and skip workers leave cash on the table every offline minute."}</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+            <strong className="text-white">{isEs ? "Solo cuchillas, nunca balance" : "Blades only, no balance"}</strong>
+            <p className="mt-1 text-white/65">{isEs ? "El bucle oficial corta césped → heno → dinero → cuchillas + trabajadores es un tándem. Gasto solo en cuchillas sin automatización te frena en el midpoint." : "The official loop cut grass → hay → cash → blades + workers is a tandem. Spending only on blades without automation stalls your mid-game."}</p>
+          </div>
+        </div>
+      </section>
+
       {/* Create / Style / RP guide clusters */}
       <section className="mx-auto max-w-7xl px-4 py-12">
         <SectionHeader eyebrow={t("qa_eyebrow")} title={isEs ? "Guías de My Grass Farm" : "My Grass Farm guides"} copy={isEs ? "Desde cortar tu primer césped hasta subir en la tabla de líderes — elige una ruta." : "From cutting your first grass to climbing the leaderboard — pick a route."} />

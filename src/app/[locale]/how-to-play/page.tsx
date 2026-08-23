@@ -81,11 +81,13 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
       ["Dinero = mejoras", "Procesa heno para dinero, la moneda de cuchillas y trabajadores."],
       ["Cuchillas = velocidad", "Más cuchilla = más heno por segundo = más dinero."],
       ["Trabajadores = automatización", "Contratar trabajadores añade cosecha automática (ingreso idle)."],
+      ["Trabajadores = ingreso offline", "Un video de creador (yt-dlp verificado) confirma: tus trabajadores siguen cortando césped aunque estés fuera."],
     ] : [
       ["Hay = base income", "Cutting grass collects hay. Everything starts from your hay production."],
       ["Cash = upgrades", "Process hay for cash, the currency of blades and workers."],
       ["Blades = speed", "More blade = more hay per second = more cash."],
       ["Workers = automation", "Hiring workers adds automatic harvesting (idle income)."],
+      ["Workers = offline income", "A creator video (yt-dlp-verified) confirms: your workers keep cutting grass even while you're offline."],
     ],
     econNote: isEs
       ? "Honestidad: no hay una fuente oficial con fecha que publique cifras exactas (precio de cada cuchilla, heno por segundo, producción por trabajador). Cuando un creador o la actualización oficial los confirme, esta sección se actualizará con números verificados. Hasta entonces, aquí no hay números inventados."

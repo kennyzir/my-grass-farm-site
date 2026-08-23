@@ -65,7 +65,8 @@ export const heroMetrics: HeroMetric[] = [
 ];
 
 export const activeCodes: GameCode[] = [
-  { code: "NONE VERIFIED", reward: "No confirmed public codes yet — see codes page for status", status: "Needs check", addedDate: "2026-08-23" }
+  { code: "RELEASE", reward: "Reported in a My Grass Farm codes video (creator-tested, not official-confirmed)", status: "Unverified", addedDate: "2026-08-23" },
+  { code: "MERCHANT", reward: "Reported in a My Grass Farm codes video (creator-tested, not official-confirmed)", status: "Unverified", addedDate: "2026-08-23" }
 ];
 
 export const expiredCodes: GameCode[] = [];

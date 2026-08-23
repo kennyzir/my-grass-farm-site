@@ -78,6 +78,16 @@ export const farmSystems: Array<{ name: string; whatItIs: string; claimState: Cl
   { name: "Upgrade & expand farm", whatItIs: "Scaling the farm is the long-run goal of the tycoon.", claimState: "Verified", source: "Official Roblox description" },
 ];
 
+export const offlineNote: GameEntity = {
+  slug: "offline-workers",
+  name: "Offline workers",
+  role: "Hired workers keep farming even when you leave the game.",
+  farmJob: "Idle income / QoL",
+  claimState: "Community-reported",
+  source: "Creator video description (0jim8W_7URc, MY GRASS FARM CODES, 2026-08-23): \"your farmers cut grass while you're offline!\"",
+  blurb: "A creator video confirms workers keep cutting grass while you're offline — so hiring workers has value beyond your active session. Treat workers as your always-on income layer.",
+};
+
 export const gameGenre = "Tycoon";         // official genre_l2, games API 2026-08-23
 export const gameGenreL1 = "Simulation";
 export const gameCreator = "One More Grass";   // group creator

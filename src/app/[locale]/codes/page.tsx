@@ -62,8 +62,8 @@ const redemptionSteps = [
 const refreshHistory = [
   {
     month: "August 2026",
-    status: "No confirmed public codes yet",
-    note: "As of this refresh no My Grass Farm code had an official, dated in-game confirmation we can point to. The active list stays empty rather than showing guessed or stale strings."
+    status: "2 codes reported by a My Grass Farm codes video",
+    note: "As of this refresh, RELEASE and MERCHANT appear in a My Grass Farm codes video (creator-tested). They are not confirmed by the official in-game announcement, so they are marked unverified — we don't call them confirmed until a dated official source does."
   }
 ];
 
@@ -85,8 +85,8 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
     eyebrow: isEs ? "My Grass Farm · Códigos" : "My Grass Farm · Codes",
     introTitle: isEs ? `Códigos de My Grass Farm (${monthLabel})` : `${siteConfig.gameName} Codes (${monthLabel})`,
     introDesc: isEs
-      ? "Estado actual de los códigos de recompensa de My Grass Farm. Solo mostramos códigos que podemos fechar y verificar desde una fuente oficial — nunca cadenas inventadas. Si no hay códigos confirmados, este estado lo dice con honestidad."
-      : "Current My Grass Farm reward code status. We list only codes we can date and verify from an official source — never invented strings. If no code is confirmed, this status page says so honestly.",
+      ? "Estado actual de los códigos de recompensa de My Grass Farm. Mostramos códigos con una fuente fechada — oficial verificada o reportada por un creador (marcada como no confirmada). Nunca inventamos cadenas. Si un código solo lo ha reportado un creador, lo decimos con honestidad."
+      : "Current My Grass Farm reward code status. We list codes with a dated source — official-verified or creator-reported (marked unverified). We never invent strings. If a code is only creator-reported, we say so honestly.",
     activeEyebrow: isEs ? "Códigos activos" : "Active codes",
     activeTitle: isEs ? "Códigos de recompensa confirmados" : "Confirmed reward codes",
     activeCopy: isEs ? "Los códigos de aquí están verificados contra una fuente actual y fechada. Los códigos duran poco, así que esta lista puede estar vacía." : "Codes here are verified against a current, dated source. Codes are short-lived, so this list may be empty.",
