@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Storage Hunters Open World app icon">
+  <defs>
+    <linearGradient id="shell" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7d24c"/>
+      <stop offset="100%" stop-color="#8fe26a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="20%" r="75%">
+      <stop offset="0%" stop-color="#fff3b0" stop-opacity=".85"/>
+      <stop offset="100%" stop-color="#fff3b0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="132" fill="#0d1108"/>
+  <rect x="52" y="52" width="408" height="408" rx="108" fill="url(#shell)"/>
+  <circle cx="256" cy="160" r="150" fill="url(#glow)"/>
+  <path d="M150 204h212v104H150z" fill="#11160a" opacity=".18"/>
+  <path d="M204 150h104v212H204z" fill="#11160a" opacity=".15"/>
+  <path d="M256 104l35 76 83 10-61 56 17 80-74-41-74 41 17-80-61-56 83-10z" fill="#11160a"/>
+  <path d="M256 144l21 46 50 6-37 33 10 48-44-24-44 24 10-48-37-33 50-6z" fill="#f7d24c"/>
+</svg>

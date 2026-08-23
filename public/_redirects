@@ -1,0 +1,6 @@
+# Cloudflare Pages _redirects — root resolves to EN homepage (next-intl default-locale-at-/en/)
+/  /en/  301
+/es  /es/  301
+# /codes moved into [locale] (hreflang EN↔ES) — preserve previously-indexed root URL (both /codes and /codes/)
+/codes  /en/codes  301
+/codes/  /en/codes  301

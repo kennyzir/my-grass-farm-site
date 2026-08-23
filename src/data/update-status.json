@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "updatedAt": "2026-07-07T09:08:12.374Z",
+  "checkedDate": "2026-07-07",
+  "monthLabel": "July 2026",
+  "sourceStatus": "roblox-api",
+  "universeId": "10261267004",
+  "roblox": {
+    "name": "[Update] Storage Hunters: Open World",
+    "visits": 20115659,
+    "playing": 23430,
+    "favorites": 118180,
+    "upVotes": 35728,
+    "downVotes": 2030,
+    "updated": "2026-07-06T21:21:15.063373Z",
+    "voteTotalsAvailable": true
+  },
+  "requiredTopicRoutes": [
+    "/lost-items",
+    "/mutations",
+    "/containers",
+    "/exclusive-items",
+    "/safes",
+    "/quests",
+    "/forecourt-cleanup",
+    "/cargo-ship",
+    "/best-money-method",
+    "/gamepasses",
+    "/basketball-quest",
+    "/discord",
+    "/gems",
+    "/luck",
+    "/auction-guide",
+    "/shop-upgrades"
+  ],
+  "notes": [
+    "Daily updater refreshes current date and Roblox public metrics when available.",
+    "Topic route validation fails if the required cluster pages are removed.",
+    "The updater does not invent active codes, rewards, odds, route math, loot tables, or official Trello claims."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "shared": {
+    "source_checked": "Source-checked {date}"
+  },
+  "homePage": {
+    "route_eyebrow": "What are you here to do?",
+    "route_title": "My Grass Farm: cut grass, earn cash, build the ultimate farm",
+    "route_copy": "Cut grass to collect hay, process it for cash, and hire workers to farm for you.",
+    "qa_eyebrow": "Quick answers",
+    "qa_title": "My Grass Farm FAQs for new farmers",
+    "qa_copy": "The questions new players ask most, answered in one line each.",
+    "create_eyebrow": "The Farm",
+    "create_title": "Build your very own grass farm",
+    "create_copy": "Manage your farm: your workers cut grass and collect hay, and you steer how your farm grows.",
+    "style_eyebrow": "Workers",
+    "style_title": "Workers run the economy",
+    "style_copy": "Hire workers to farm for you — the farm's growth engine is feeding and growing your worker force.",
+    "roleplay_eyebrow": "Blades",
+    "roleplay_title": "Blades & upgrades boost your farm",
+    "roleplay_copy": "Unlock powerful blades to cut faster and upgrade — the farm's answer to raking in more hay and cash.",
+    "src_eyebrow": "Source check",
+    "src_title": "My Grass Farm sources & how we verify",
+    "src_copy": "Facts come from the official Roblox description (cut grass, hay, cash, blades, workers) and dated creator videos.",
+    "video_eyebrow": "Video & creators",
+    "video_title": "See My Grass Farm in action",
+    "video_copy": "A real first-session walkthrough of growing your farm from grass to cash."
+  }
+}
