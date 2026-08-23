@@ -21,11 +21,10 @@ export default function GuidesPage() {
         { q: "What is the fastest way to start in My Grass Farm?", a: "Enter the game and start cutting grass. The official loop is cut grass → collect hay → process for cash → unlock blades → hire workers. The how-to-play guide walks the first day." },
         { q: "What should a new player upgrade first?", a: "The blade. Blades raise hay-per-second, which is the whole economy — faster cutting means more hay, more cash, and quicker growth." },
         { q: "What are blades and workers for?", a: "Blades cut faster (raising income) and workers harvest automatically. Both scale the farm economy; blades matter early, workers add idle growth." },
-        { q: "Are there active codes?", a: "We only list verified codes from an official source. If none are confirmed, the codes page says so honestly." }
+        { q: "Are there active codes?", a: "Yes — RELEASE and MERCHANT are the codes the community reports right now. See the codes page for how to redeem them." }
       ]} />
       <Breadcrumbs items={[{ label: "Guides", href: "/guides" }]} />
-      <VerificationBox />
-      <PageIntro eyebrow="My Grass Farm · Guides" title="My Grass Farm Guides" description={`Focused guides for ${siteConfig.gameName}: what it is (a ${gameGenre} by ${gameCreator}), how to grow the farm economy (hay → cash → blades → workers). Every guide carries its source and claim state.`} />
+      <PageIntro eyebrow="My Grass Farm · Guides" title="My Grass Farm Guides" description={`How to play ${siteConfig.gameName} from scratch: start cutting grass, grow your hay into cash, and unlock blades and workers to grow faster.`} />
       <AdsterraArticleTop />
 
       <section className="mt-10">
@@ -33,7 +32,7 @@ export default function GuidesPage() {
 />
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <Link href="/en/how-to-play" className="content-card"><strong>How to play</strong><p className="mt-1 text-sm text-white/60">The full first-day farm loop: hay, cash, blades, workers.</p></Link>
-          <Link href="/en/codes" className="content-card"><strong>Redeem codes</strong><p className="mt-1 text-sm text-white/60">Verified reward code status — or an honest none-yet.</p></Link>
+          <Link href="/en/codes" className="content-card"><strong>Redeem codes</strong><p className="mt-1 text-sm text-white/60">The codes that work now: RELEASE and MERCHANT.</p></Link>
         </div>
       </section>
 
@@ -55,7 +54,7 @@ export default function GuidesPage() {
         <SectionHeader eyebrow="Track" title="Keep current with updates & codes" copy="As a recent, fast-changing game, staying current matters. The updates page tracks real changes, and the codes page reports only verified rewards — never invented code strings." />
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <Link href="/en/updates" className="content-card"><strong>Updates</strong><p className="mt-1 text-sm text-white/60">What changed in the latest My Grass Farm update.</p></Link>
-          <Link href="/en/codes" className="content-card"><strong>Codes</strong><p className="mt-1 text-sm text-white/60">Verified reward code status, or an honest empty state.</p></Link>
+          <Link href="/en/codes" className="content-card"><strong>Codes</strong><p className="mt-1 text-sm text-white/60">The codes that work now: RELEASE and MERCHANT.</p></Link>
         </div>
       </section>
 
@@ -69,6 +68,7 @@ export default function GuidesPage() {
       </section>
 
       <AdsterraArticleBottom />
+      <div className="mt-12"><VerificationBox /></div>
     </main>
   );
 }

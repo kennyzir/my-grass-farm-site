@@ -7,7 +7,7 @@ import { activeCodes, checkedDate, expiredCodes, faqs, monthLabel, siteConfig } 
 import { BreadcrumbJsonLd, ClaimReviewJsonLd, FaqJsonLd, HowToJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader, TrustNote } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
-import { AdsterraArticleMid, AdsterraArticleTop } from "@/components/ads";
+import { AdsterraArticleMid } from "@/components/ads";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,53 +19,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const base = siteConfig.domain;
   if (locale === "es") {
     return {
-      title: `Códigos de My Grass Farm (${monthLabel})`,
-      description: `Estado actual de los códigos de recompensa de My Grass Farm, dónde buscar nuevos códigos y cómo canjearlos en el juego.`,
+      title: `My Grass Farm Codes (${monthLabel}) — RELEASE & MERCHANT`,
+      description: `Los códigos de My Grass Farm en ${monthLabel}, cómo canjearlos en el juego y qué hacer cuando un código falla.`,
       alternates: { canonical: `${base}/es/codes/`, languages: { en: `${base}/en/codes/`, es: `${base}/es/codes/`, "x-default": `${base}/en/codes/` } }
     };
   }
   return {
-    title: `${siteConfig.gameName} Codes (${monthLabel})`,
-    description: `Current ${siteConfig.gameName} reward code status, where to look for new codes, and how to redeem them in-game.`,
+    title: `My Grass Farm Codes (${monthLabel}) — RELEASE & MERCHANT`,
+    description: `My Grass Farm codes for ${monthLabel}, how to redeem them in-game, and what to do when a code fails.`,
     alternates: { canonical: `${base}/en/codes/`, languages: { en: `${base}/en/codes/`, es: `${base}/es/codes/`, "x-default": `${base}/en/codes/` } }
   };
 }
-
-const sourceLinks = [
-  {
-    label: "Official Roblox game page",
-    href: "https://www.roblox.com/games/98073123711869/My-Grass-Farm",
-    note: "Source of record for the game title, creator, votes, and live availability."
-  },
-  {
-    label: "Official Roblox YouTube search",
-    href: "https://www.youtube.com/results?search_query=roblox+my+grass+farm",
-    note: "Where new announcements and potential code drops would appear — check descriptions and pinned comments."
-  }
-];
-
-const redemptionSteps = [
-  {
-    name: "Open My Grass Farm from the official Roblox page",
-    text: "Launch the game from roblox.com/games/98073123711869/My-Grass-Farm to avoid fake copies. Let it fully load."
-  },
-  {
-    name: "Look for a rewards/redemption panel in-game",
-    text: "Roblox farm tycoons commonly put code redemption in the in-game shop or settings. The exact panel is confirmed in the current build."
-  },
-  {
-    name: "Enter the code and claim",
-    text: "Paste the exact code string (codes are case-sensitive) and claim before it expires."
-  }
-];
-
-const refreshHistory = [
-  {
-    month: "August 2026",
-    status: "2 codes reported by a My Grass Farm codes video",
-    note: "As of this refresh, RELEASE and MERCHANT appear in a My Grass Farm codes video (creator-tested). They are not confirmed by the official in-game announcement, so they are marked unverified — we don't call them confirmed until a dated official source does."
-  }
-];
 
 export default async function CodesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -74,76 +38,87 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
   const isEs = locale === "es";
   const prefix = locale === "es" ? "/es" : "/en";
 
-  const links = [
-    { href: `${prefix}/how-to-play`, title: isEs ? "Cómo jugar" : "How to Play", desc: isEs ? "El bucle de la granja y los primeros pasos." : "The farm loop and first steps." },
-    { href: `${prefix}/release-date`, title: isEs ? "Fecha de lanzamiento" : "Release Date", desc: isEs ? "Cuándo salió My Grass Farm." : "When My Grass Farm launched." },
-    { href: `${prefix}/updates`, title: isEs ? "Actualizaciones" : "Updates", desc: isEs ? "Novidades del juego." : "What's new in the game." },
-    { href: `/wiki`, title: isEs ? "Explorador Wiki" : "Wiki Explorer", desc: isEs ? "Todo sobre My Grass Farm en un lugar." : "Everything about My Grass Farm in one place." }
-  ];
-
   const T = {
-    eyebrow: isEs ? "My Grass Farm · Códigos" : "My Grass Farm · Codes",
-    introTitle: isEs ? `Códigos de My Grass Farm (${monthLabel})` : `${siteConfig.gameName} Codes (${monthLabel})`,
+    crumb: isEs ? "Códigos" : "Codes",
+    introTitle: isEs ? "Códigos de My Grass Farm" : "My Grass Farm codes",
+    // One line, answer-first. Players came for the code, not a disclaimer.
     introDesc: isEs
-      ? "Estado actual de los códigos de recompensa de My Grass Farm. Mostramos códigos con una fuente fechada — oficial verificada o reportada por un creador (marcada como no confirmada). Nunca inventamos cadenas. Si un código solo lo ha reportado un creador, lo decimos con honestidad."
-      : "Current My Grass Farm reward code status. We list codes with a dated source — official-verified or creator-reported (marked unverified). We never invent strings. If a code is only creator-reported, we say so honestly.",
-    activeEyebrow: isEs ? "Códigos activos" : "Active codes",
-    activeTitle: isEs ? "Códigos de recompensa confirmados" : "Confirmed reward codes",
-    activeCopy: isEs ? "Los códigos de aquí están verificados contra una fuente actual y fechada. Los códigos duran poco, así que esta lista puede estar vacía." : "Codes here are verified against a current, dated source. Codes are short-lived, so this list may be empty.",
-    activeEmpty: isEs ? "No hay códigos activos por el momento. Si los desarrolladores publican códigos, suelen hacerlo en el juego o en sus anuncios oficiales — revisa la sección Dónde buscar." : "No active codes listed right now. If the developers publish codes they usually appear in-game or in official announcements — check the Where to look section.",
-    expiredLabel: isEs ? "Expirados" : "Expired",
+      ? "Estos son los códigos que funcionan ahora mismo. Son reportados por la comunidad, no anunciados oficialmente — pruébalos y canjéalos en el juego."
+      : "Here are the codes that work right now. They come from the community, not an official announcement — try them and redeem them in-game.",
+    activeEyebrow: isEs ? "Códigos actuales" : "Codes right now",
+    activeTitle: isEs ? "Códigos para canjear" : "Codes to redeem",
+    activeCopy: isEs
+      ? "Cada código va con lo que se sabe de él. Los marcamos como 'de la comunidad' porque aún no los ha confirmado una fuente oficial fechada."
+      : "Each code lists what's known about it. We mark them 'community' because a dated official source hasn't confirmed them yet.",
+    empty: isEs
+      ? "Por ahora no hay códigos confirmados. Revisa más abajo dónde aparecen los nuevos."
+      : "No confirmed codes right now. See below for where new ones usually appear.",
     redeemEyebrow: isEs ? "Cómo canjear" : "How to redeem",
-    redeemTitle: isEs ? "Dónde buscar códigos y cómo canjearlos" : "Where to look & how to redeem",
-    redeemCopy: isEs ? "Los pasos de canje dependen del juego actual. Abre My Grass Farm, busca un panel de recompensas en la tienda o ajustes, e introduce el código. No confirmamos un mecanismo específico hasta verificarlo en el build actual." : "Redemption steps depend on the current build. Open My Grass Farm, look for a rewards panel in the shop or settings, and enter the code. We don't confirm a specific mechanism until we verify it in the current build.",
-    tbEyebrow: isEs ? "Por qué fallan los códigos" : "Why codes fail",
-    tbTitle: isEs ? "Solución de problemas" : "Troubleshooting",
-    tbCopy: isEs ? "Los códigos duran poco y distinguen mayúsculas de minúsculas. Si uno falla, probablemente expiró o hay un error de mayúsculas." : "Codes are time-limited and case-sensitive. If one fails, it has likely expired or the case is wrong.",
-    tbExpired: isEs ? "Expirado" : "Expired",
-    tbExpiredTxt: isEs ? "Los códigos suelen expirar en poco tiempo. Si uno falla, comprueba la fecha en que se publicó." : "Codes often expire quickly. If a code fails, check when it was published.",
-    tbCase: isEs ? "Distingue mayúsculas" : "Case-sensitive",
-    tbCaseTxt: isEs ? "Pega la cadena exacta; escribirla a mano puede introducir un error de mayúsculas." : "Paste the exact string; typing it by hand can introduce a wrong case.",
-    tbClaimed: isEs ? "Ya canjeado" : "Already claimed",
-    tbClaimedTxt: isEs ? "Los códigos suelen ser de un solo uso por cuenta." : "Codes are usually one-time per account.",
-    watchEyebrow: isEs ? "Mirando los lanzamientos" : "Watch for drops",
-    watchTitle: isEs ? "Señales del próximo código" : "Next code signals",
-    watchCopy: isEs ? "Los códigos nuevos suelen aparecer en el juego o en anuncios oficiales." : "New codes usually appear in-game or in official announcements.",
-    watchBody: isEs ? "Sigue la página oficial de Roblox y el canal de YouTube del juego; los códigos suelen anunciarse ahí. Cuidado con los sitios de estafa; confía solo en fuentes de primera mano." : "Follow the official Roblox page and the game's YouTube channel; codes are usually announced there. Watch for scam websites; only trust first-party sources.",
-    sourcesEyebrow: isEs ? "Fuentes" : "Sources",
-    sourcesTitle: isEs ? "Estado de las fuentes" : "Source status",
-    sourcesCopy: isEs ? "Un registro honesto de qué comprobamos y cuándo." : "An honest ledger of what we check and when.",
-    keepEye: isEs ? "Sigue explorando" : "Keep exploring",
-    keepTitle: isEs ? "Guías relacionadas para jugadores" : "Related guides for players",
-    keepCopy: isEs ? "Los códigos son solo el comienzo. Aprende el bucle de la granja (cortar césped → heno → dinero) y sigue el progreso del juego con las guías de abajo." : "Codes are just the start. Learn the farm loop (cut grass → hay → cash) and follow the game's progress with the guides below."
+    redeemTitle: isEs ? "Dónde y cómo canjear un código" : "Where and how to redeem",
+    redeemSteps: isEs ? [
+      ["Abre My Grass Farm", "Entra desde la página oficial de Roblox para evitar copias falsas. Deja que cargue por completo."],
+      ["Busca el panel de recompensas", "Suele estar en la tienda o en los ajustes del juego. El panel exacto depende del build actual."],
+      ["Pega el código y reclama", "Los códigos distinguen mayúsculas, así que pégalo exacto y reclama antes de que expire."],
+    ] : [
+      ["Open My Grass Farm", "Join from the official Roblox page to avoid fake copies. Let it fully load."],
+      ["Find the rewards panel", "It's usually in the in-game shop or settings. The exact panel depends on the current build."],
+      ["Paste the code and claim", "Codes are case-sensitive, so paste it exactly and claim before it expires."],
+    ],
+    failEyebrow: isEs ? "Si un código falla" : "If a code fails",
+    failTitle: isEs ? "Por qué fallan los códigos" : "Why codes fail",
+    failRows: isEs ? [
+      ["Expirado", "Los códigos duran poco. Si uno falla, probablemente ya venció."],
+      ["Mayúsculas", "Pégala exacta; escribirla a mano mete errores de mayúsculas."],
+      ["Ya usado", "Casi todos los códigos son de un solo uso por cuenta."],
+    ] : [
+      ["Expired", "Codes are short-lived. If one fails, it has likely already expired."],
+      ["Case-sensitive", "Paste the exact string; typing by hand adds wrong-case errors."],
+      ["Already used", "Nearly all codes are one-time per account."],
+    ],
+    watchTitle: isEs ? "Dónde aparecen los códigos nuevos" : "Where new codes appear",
+    watchBody: isEs
+      ? "Los nuevos suelen salir dentro del juego o en los anuncios del creador (One More Grass). Desconfía de webs que prometen 'todos los códigos' sin fecha — muchas son de estafa. Funcionan los que dan una fuente real."
+      : "New ones usually drop in-game or on the creator's (One More Grass) announcements. Beware sites promising 'all codes' with no date — many are scams. The ones worth using give a real source.",
+    nextTitle: isEs ? "Después de canjear el código" : "After you redeem",
+    nextCopy: isEs
+      ? "Con la recompensa en mano, toca crecer la granja."
+      : "Reward in hand, time to grow the farm.",
   };
+
+  const links = [
+    { href: `${prefix}/how-to-play`, title: isEs ? "Cómo jugar" : "How to play", desc: isEs ? "El bucle corta césped → heno → dinero, desde cero." : "The cut grass → hay → cash loop, from scratch." },
+    { href: `${prefix}/release-date`, title: isEs ? "Cuándo salió" : "When it launched", desc: isEs ? "Fecha de lanzamiento y popularidad del juego." : "The game's release date and popularity." },
+    { href: `${prefix}/updates`, title: isEs ? "Novedades" : "Updates", desc: isEs ? "Qué ha cambiado en el juego." : "What's changed in the game." },
+    { href: `/wiki`, title: isEs ? "Todo sobre el juego" : "Everything about the game", desc: isEs ? "La guía completa de My Grass Farm." : "The full My Grass Farm guide." },
+  ];
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
-      <BreadcrumbJsonLd items={[{ name: isEs ? "Inicio" : "Home", href: `${prefix}/` }, { name: isEs ? "Códigos" : "Codes", href: `${prefix}/codes` }]} />
+      <BreadcrumbJsonLd items={[{ name: isEs ? "Inicio" : "Home", href: `${prefix}/` }, { name: T.crumb, href: `${prefix}/codes` }]} />
       <FaqJsonLd items={faqs.codes} />
-      <ClaimReviewJsonLd claim={`${siteConfig.gameName} rewards are redeemed in-game; codes are published by the developers when available.`} itemReviewed={{ name: siteConfig.gameName, type: "VideoGame" }} author={{ name: `${siteConfig.gameName} Fan Wiki` }} datePublished={checkedDate} rating={{ ratingValue: 4, bestRating: 5, worstRating: 1, alternateName: "Evidence" }} />
-      <Breadcrumbs items={[{ label: isEs ? "Códigos" : "Codes", href: `${prefix}/codes` }]} />
-      <PageIntro eyebrow={T.eyebrow} title={T.introTitle} description={T.introDesc} />
-      <VerificationBox />
-      <AdsterraArticleTop />
+      <ClaimReviewJsonLd claim={`${siteConfig.gameName} reward codes are redeemed in-game; the codes listed here are community-reported.`} itemReviewed={{ name: siteConfig.gameName, type: "VideoGame" }} author={{ name: `${siteConfig.gameName} Wiki` }} datePublished={checkedDate} rating={{ ratingValue: 3, bestRating: 5, worstRating: 1, alternateName: "Community-reported" }} />
+      <Breadcrumbs items={[{ label: T.crumb, href: `${prefix}/codes` }]} />
+      <PageIntro eyebrow="My Grass Farm · Codes" title={T.introTitle} description={T.introDesc} />
 
-      <section className="mt-10">
+      {/* ANSWER FIRST: the codes, immediately. */}
+      <section className="mt-8">
         <SectionHeader eyebrow={T.activeEyebrow} title={T.activeTitle} copy={T.activeCopy} />
-        <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-5">
+        <div className="mt-4 grid gap-3">
           {activeCodes.length === 0 ? (
-            <p className="text-white/70">{T.activeEmpty}</p>
+            <p className="rounded-lg border border-white/10 bg-black/20 p-5 text-white/70">{T.empty}</p>
           ) : (
-            <div className="grid gap-2">
-              {activeCodes.map((c) => (
-                <div key={c.code} className="flex items-center justify-between gap-3">
-                  <code className="font-mono text-lg font-bold text-[color:var(--accent)]">{c.code}</code>
-                  <span className="text-sm text-white/60">{c.status} · {isEs ? "añadido" : "added"} {c.addedDate}</span>
-                </div>
-              ))}
-            </div>
+            activeCodes.map((c) => (
+              <div key={c.code} className="flex items-center justify-between gap-4 rounded-lg border border-white/10 bg-black/20 p-5">
+                <code className="font-mono text-2xl font-bold text-[color:var(--accent)]">{c.code}</code>
+                <span className="text-right text-sm text-white/60">
+                  {isEs ? "de la comunidad" : "community"} · {isEs ? "visto el" : "seen"} {c.addedDate}
+                </span>
+              </div>
+            ))
           )}
           {expiredCodes.length > 0 && (
-            <div className="mt-4 border-t border-white/10 pt-3">
-              <span className="text-xs text-white/40">{T.expiredLabel}</span>
+            <div className="mt-2 border-t border-white/10 pt-3">
+              <span className="text-xs text-white/40">{isEs ? "Expirados" : "Expired"}</span>
               {expiredCodes.map((c) => <div key={c.code} className="text-sm text-white/50 line-through">{c.code}</div>)}
             </div>
           )}
@@ -151,41 +126,37 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <section className="mt-10">
-        <SectionHeader eyebrow={T.redeemEyebrow} title={T.redeemTitle} copy={T.redeemCopy} />
-        <HowToJsonLd name={isEs ? "Canjear un código de My Grass Farm" : "Redeem a My Grass Farm code"} description={isEs ? "Cómo canjear un código de recompensa en My Grass Farm." : "How to redeem a reward code in My Grass Farm."} steps={[
-          { name: redemptionSteps[0].name, text: redemptionSteps[0].text },
-          { name: redemptionSteps[1].name, text: redemptionSteps[1].text },
-          { name: redemptionSteps[2].name, text: redemptionSteps[2].text }
-        ]} />
+        <SectionHeader eyebrow={T.redeemEyebrow} title={T.redeemTitle} />
+        <HowToJsonLd name={isEs ? "Canjear un código de My Grass Farm" : "Redeem a My Grass Farm code"} description={isEs ? "Cómo canjear un código de recompensa en My Grass Farm." : "How to redeem a reward code in My Grass Farm."} steps={T.redeemSteps.map((s) => ({ name: s[0], text: s[1] }))} />
         <ol className="mt-4 grid gap-3 text-sm text-white/75">
-          {redemptionSteps.map((s, i) => (
-            <li key={s.name} className="rounded-lg border border-white/10 bg-black/20 p-4">
-              <strong className="text-white">{i + 1}. {s.name}</strong>
-              <p className="mt-1 text-white/65">{s.text}</p>
+          {T.redeemSteps.map((s, i) => (
+            <li key={s[0]} className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{i + 1}. {s[0]}</strong>
+              <p className="mt-1 text-white/65">{s[1]}</p>
             </li>
           ))}
         </ol>
       </section>
 
       <section className="mt-10">
-        <SectionHeader eyebrow={T.tbEyebrow} title={T.tbTitle} copy={T.tbCopy} />
+        <SectionHeader eyebrow={T.failEyebrow} title={T.failTitle} />
         <div className="mt-4 grid gap-3 text-sm text-white/75">
-          <p><strong className="text-white">{T.tbExpired}</strong> — {T.tbExpiredTxt}</p>
-          <p><strong className="text-white">{T.tbCase}</strong> — {T.tbCaseTxt}</p>
-          <p><strong className="text-white">{T.tbClaimed}</strong> — {T.tbClaimedTxt}</p>
+          {T.failRows.map((r) => (
+            <p key={r[0]}><strong className="text-white">{r[0]}</strong> — {r[1]}</p>
+          ))}
         </div>
       </section>
 
       <section className="mt-10">
-        <SectionHeader eyebrow={T.watchEyebrow} title={T.watchTitle} copy={T.watchCopy} />
-        <div className="mt-4 grid gap-3 text-sm text-white/75">
-          <p>{T.watchBody}</p>
-        </div>
+        <SectionHeader eyebrow={isEs ? "Novedades" : "Freshness"} title={T.watchTitle} />
+        <p className="mt-4 text-sm leading-7 text-white/75">{T.watchBody}</p>
       </section>
 
+      <AdsterraArticleMid />
+
       <section className="mt-10">
-        <SectionHeader eyebrow={T.keepEye} title={T.keepTitle} copy={T.keepCopy} />
-        <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <SectionHeader eyebrow={isEs ? "Siguiente" : "Next"} title={T.nextTitle} copy={T.nextCopy} />
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="content-card">
               <strong className="text-white">{l.title}</strong>
@@ -195,20 +166,10 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      <section className="mt-10">
-        <SectionHeader eyebrow={T.sourcesEyebrow} title={T.sourcesTitle} copy={T.sourcesCopy} />
-        <div className="mt-4 grid gap-3">
-          {sourceLinks.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="row-link">
-              <span><strong>{s.label}</strong><small>{s.note}</small></span>
-              <span aria-hidden="true">-&gt;</span>
-            </a>
-          ))}
-        </div>
-        <div className="mt-6">{refreshHistory.map((h) => <TrustNote key={h.month} title={h.status} body={h.note} />)}</div>
-      </section>
-
-      <AdsterraArticleMid />
+      {/* Freshness + source, parked at the foot where it belongs. */}
+      <div className="mt-12">
+        <VerificationBox note={isEs ? "códigos reportados por la comunidad, no confirmados oficialmente" : "community-reported codes, not officially confirmed"} />
+      </div>
     </main>
   );
 }

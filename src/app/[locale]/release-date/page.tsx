@@ -97,7 +97,6 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
       <BreadcrumbJsonLd items={[{ name: isEs ? "Inicio" : "Home", href: `${prefix}/` }, { name: T.crumb, href: `${prefix}/release-date` }]} />
       <FaqJsonLd items={[{ q: T.faq1q, a: T.faq1a }, { q: T.faq2q, a: T.faq2a }, { q: T.faq3q, a: T.faq3a }]} />
       <Breadcrumbs items={[{ label: T.crumb, href: `${prefix}/release-date` }]} />
-      <VerificationBox />
       <PageIntro eyebrow="My Grass Farm · Release Date" title={T.introTitle} description={T.introDesc} />
       <AdsterraArticleTop />
 
@@ -148,6 +147,7 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
           <Link href={`${prefix}/updates`} className="content-card"><strong>{T.upLink}</strong><p className="mt-1 text-sm text-white/60">{T.upDesc}</p></Link>
         </div>
       </section>
+      <div className="mt-12"><VerificationBox note="tracked against the official Roblox page" /></div>
     </main>
   );
 }

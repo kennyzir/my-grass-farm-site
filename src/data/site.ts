@@ -37,7 +37,7 @@ export const siteConfig: SiteConfig = {
     },
     {
       label: "Wiki", href: "/wiki", items: [
-        { label: "Full Wiki", href: "/wiki", description: "The focused fan wiki — codes, gameplay, progression." },
+        { label: "Full Wiki", href: "/wiki", description: "Codes, how to play, and what's new." },
         { label: "Guide Hub", href: "/guides", description: "The farming guides in one place." }
       ]
     },
@@ -194,7 +194,7 @@ export const officialLinks: LinkCard[] = [
   {
     title: "Source Status Page",
     href: "/sources",
-    description: "An honest ledger of what we verify and when.",
+    description: "What was checked, and when.",
     miniLabel: "Sources"
   }
 ];

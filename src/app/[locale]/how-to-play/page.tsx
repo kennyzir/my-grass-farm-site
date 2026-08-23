@@ -40,8 +40,8 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
     crumb: isEs ? "Cómo jugar" : "How to Play",
     introTitle: isEs ? "Cómo jugar My Grass Farm" : "How to play My Grass Farm",
     introDesc: isEs
-      ? `My Grass Farm es un ${gameGenre} en Roblox de ${gameCreator}: cortas césped, recolectas heno, lo conviertes en dinero y reinviertes en cuchillas más rápidas y trabajadores. La descripción oficial lo resume: corta césped → recolecta heno → procesa para dinero → desbloquea cuchillas → contrata trabajadores → expande tu granja. Esta guía cubre tu primer día.`
-      : `My Grass Farm is a ${gameGenre} on Roblox by ${gameCreator}: you cut grass, collect hay, process it for cash, and reinvest in faster blades and workers. The official description sums it up: cut grass → collect hay → process for cash → unlock blades → hire workers → expand your farm. This guide covers your first day.`,
+      ? `My Grass Farm es un ${gameGenre} en Roblox: cortas césped → recolectas heno → lo cambias por dinero → desbloqueas cuchillas → contratas trabajadores para que corten por ti. Abajo, la ruta desde cero.`
+      : `My Grass Farm is a Roblox ${gameGenre}: cut grass → collect hay → trade it for cash → unlock blades → hire workers to cut for you. The route from scratch is below.`,
     section1Eyebrow: isEs ? "Lo esencial" : "The essentials",
     section1T: isEs ? "Qué es My Grass Farm" : "What My Grass Farm is",
     section1B: isEs ? [
@@ -119,21 +119,11 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
       <FaqJsonLd items={[{ q: T.faq1q, a: T.faq1a }, { q: T.faq2q, a: T.faq2a }]} />
       <HowToJsonLd name={T.introTitle} description={T.introDesc} steps={T.section2Steps.slice(0, 3).map((s) => ({ name: s[0], text: s[1] }))} />
       <Breadcrumbs items={[{ label: T.crumb, href: `${prefix}/how-to-play` }]} />
-      <VerificationBox />
       <PageIntro eyebrow="My Grass Farm · How to Play" title={T.introTitle} description={T.introDesc} />
       <PlayQuickRules label={isEs ? "En 30 segundos" : "In 30 seconds"} rules={qrRules} />
-      <AdsterraArticleTop />
 
-      <section className="mt-10">
-        <SectionHeader eyebrow={T.section1Eyebrow} title={T.section1T} />
-        <ul className="mt-4 grid gap-2 text-sm leading-6 text-white/75 list-disc pl-5">
-          {T.section1B.map((p: string) => <li key={p}>{p}</li>)}
-        </ul>
-      </section>
-
-      <AdsterraArticleMid />
-
-      <section className="mt-10">
+      {/* ANSWER FIRST: the starting route, before any "what it is" talk. */}
+      <section className="mt-8">
         <SectionHeader eyebrow={T.section2Eyebrow} title={T.section2T} copy={T.section2Intro} />
         <ol className="mt-4 grid gap-3 text-sm text-white/75">
           {T.section2Steps.map((s: string[], i: number) => (
@@ -145,20 +135,31 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
         </ol>
       </section>
 
-      {/* Farm roster — verified entities from the official description (hay/cash/blades/workers/farm) */}
+      <AdsterraArticleTop />
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={T.section1Eyebrow} title={T.section1T} />
+        <ul className="mt-4 grid gap-2 text-sm leading-6 text-white/75 list-disc pl-5">
+          {T.section1B.map((p: string) => <li key={p}>{p}</li>)}
+        </ul>
+      </section>
+
+      <AdsterraArticleMid />
+
+      {/* Farm roster — the farm's pieces (from the official description) */}
       <section className="mt-10">
         <DataTable
           eyebrow={isEs ? "Granja" : "Farm"}
           title={isEs ? "Las piezas de tu granja" : "Your farm's pieces"}
           description={isEs
-            ? `Estas piezas provienen de la descripción oficial de Roblox (${gameCreator}, ${gameGenre}): heno, dinero, cuchillas, trabajadores y expansión. Sin inventar números.`
-            : `These pieces come from the official Roblox description (${gameCreator}, ${gameGenre}): hay, cash, blades, workers, and expansion. No invented numbers.`}
+            ? "Estas piezas vienen de la descripción oficial del juego: heno, dinero, cuchillas, trabajadores y expansión."
+            : "These pieces come from the game's official description: hay, cash, blades, workers, and expansion."}
           columns={[isEs ? "Pieza" : "Piece", isEs ? "Rol" : "Role", isEs ? "Misión en la granja" : "Farm job"]}
           rows={gameEntities.map((e) => [e.name, e.role, e.farmJob])}
         />
       </section>
 
-      {/* Farm economy concepts — official description backed, no invented numbers */}
+      {/* Farm economy — the loop, in plain words */}
       <section className="mt-10">
         <SectionHeader eyebrow={T.econEyebrow} title={T.econT} copy={T.econB} />
         <div className="mt-4 grid gap-3 text-sm text-white/75">

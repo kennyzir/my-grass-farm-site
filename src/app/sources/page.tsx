@@ -5,7 +5,7 @@ import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 
 export const metadata: Metadata = {
   title: "My Grass Farm — Source Status",
-  description: "An honest ledger of what we verified on the My Grass Farm fan wiki, when, and from what source.",
+  description: "What was checked on My Grass Farm, when, and from what source.",
   alternates: { canonical: `${siteConfig.domain}/sources` }
 };
 
@@ -14,7 +14,7 @@ export default function SourcesPage() {
     <main className="mx-auto max-w-7xl px-4 py-10">
       <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Sources", href: "/sources" }]} />
       <Breadcrumbs items={[{ label: "Sources", href: "/sources" }]} />
-      <PageIntro eyebrow="My Grass Farm · Verifiability" title="Source status" description="Every claim on this wiki carries a source and a claim-state label (Verified or Community-reported). Nothing is invented." />
+      <PageIntro eyebrow="My Grass Farm · Verifiability" title="Source status" description="What was checked on this wiki, when, and where each fact comes from — so you can tell confirmed from community-reported." />
 
       <section className="mt-10">
         <SectionHeader eyebrow="Verified" title="What we verify" copy="Claims marked Verified come from a dated, current source we can point to — most often the official Roblox game page or an official YouTube drop." />

@@ -67,7 +67,6 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
       <WebSiteJsonLd />
       <VideoGameJsonLd />
       <FaqJsonLd items={faqs.home} />
-      <VerificationBox />
       <BrandHero isEs={isEs} valueProp={valueProp} shortDisc={shortDisc} />
 
       <section className="border-y border-white/10 bg-black/25">

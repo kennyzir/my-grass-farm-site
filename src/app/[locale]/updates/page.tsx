@@ -39,8 +39,8 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
     crumb: isEs ? "Actualizaciones" : "Updates",
     introTitle: isEs ? "Actualizaciones de My Grass Farm" : "My Grass Farm updates",
     introDesc: isEs
-      ? "Una página honesta de seguimiento de actualizaciones. My Grass Farm cambia con frecuencia, pero los cambios no siempre se publican como notas de parche oficiales. Aquí explicamos cómo verificar un cambio real, dónde se anuncian las novedades, y qué hemos confirmado hasta ahora — sin inventar notas de parche."
-      : "An honest update-tracking page. My Grass Farm changes often, but changes aren't always published as official patch notes. Here we explain how to verify a real change, where updates get announced, and what we've confirmed so far — without inventing patch notes.",
+      ? "My Grass Farm cambia seguido, pero casi nunca publica notas de parche oficiales. Aquí te decimos dónde se anuncian los cambios y cómo darte cuenta si algo de verdad cambió — sin inventar notas."
+      : "My Grass Farm changes often, but it rarely publishes official patch notes. Here's where changes get announced and how to tell if something actually changed — without making anything up.",
     howEyebrow: isEs ? "Cómo verificamos" : "How we verify",
     howT: isEs ? "Qué contamos como actualización real" : "What counts as a real update",
     howB: isEs ? [
@@ -154,6 +154,7 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
           <Link href={`${prefix}/release-date`} className="content-card"><strong>{T.relTitle}</strong><p className="mt-1 text-sm text-white/60">{T.relDesc}</p></Link>
         </div>
       </section>
+      <div className="mt-12"><VerificationBox note="tracked against the official Roblox page" /></div>
     </main>
   );
 }

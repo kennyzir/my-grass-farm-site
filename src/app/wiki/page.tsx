@@ -9,7 +9,7 @@ import { AdsterraArticleBottom, AdsterraArticleTop, AdsterraArticleMid } from "@
 
 export const metadata: Metadata = {
   title: `${siteConfig.gameName} Wiki — My Grass Farm Hub · ${monthLabel}`,
-  description: `A focused fan wiki for My Grass Farm: cut grass, collect hay, process it for cash, unlock blades, and hire workers — plus codes, updates, and honest sourcing.`,
+  description: `My Grass Farm: cut grass, collect hay, process it for cash, unlock blades, hire workers — plus codes, launch date, and updates.`,
   alternates: { canonical: `${siteConfig.domain}/wiki` }
 };
 
@@ -25,8 +25,7 @@ export default function WikiPage() {
         { q: "When did My Grass Farm launch?", a: "My Grass Farm was created 23 July 2026 per the official Roblox API. See the release date page for details." }
       ]} />
       <Breadcrumbs items={[{ label: "Wiki", href: "/wiki" }]} />
-      <VerificationBox />
-      <PageIntro eyebrow="My Grass Farm · Wiki" title="My Grass Farm Wiki Explorer" description={`A focused fan wiki for ${siteConfig.gameName}: what it is (a ${gameGenre} by ${gameCreator}), how to play, the hay/cash/blade/worker farm loop, and how to track codes and updates. This is an unofficial fan resource: every piece of info carries its source and claim state.`} />
+      <PageIntro eyebrow="My Grass Farm · Wiki" title="My Grass Farm Wiki" description={`Everything you need to play ${siteConfig.gameName}: what you do (cut grass → hay → cash → blades → workers), the codes, when it launched, and what's changed.`} />
       <AdsterraArticleTop />
 
       <section className="mt-10">
@@ -58,7 +57,7 @@ export default function WikiPage() {
       <section className="mt-10">
         <SectionHeader eyebrow="Fresh" title="Track: codes, updates, history" copy="As a young, rapidly-changing game, keeping current matters. The codes page reports only verified rewards, the updates page tracks real changes, and the release date page anchors the game's history." />
         <div className="mt-4 grid gap-4 md:grid-cols-3">
-          <Link href="/en/codes" className="content-card"><strong>Codes</strong><p className="mt-1 text-sm text-white/60">Verified reward code status, or an honest 'none confirmed yet'.</p></Link>
+          <Link href="/en/codes" className="content-card"><strong>Codes</strong><p className="mt-1 text-sm text-white/60">The codes that work now: RELEASE and MERCHANT.</p></Link>
           <Link href="/en/updates" className="content-card"><strong>Updates</strong><p className="mt-1 text-sm text-white/60">What changed in the latest My Grass Farm update.</p></Link>
           <Link href="/en/release-date" className="content-card"><strong>Release date</strong><p className="mt-1 text-sm text-white/60">Created 23 July 2026 — the game's official data.</p></Link>
         </div>
@@ -67,8 +66,8 @@ export default function WikiPage() {
       <AdsterraArticleMid />
 
       <section className="mt-10">
-        <SectionHeader eyebrow="How we verify" title="Honest sourcing" copy="This is an unofficial fan resource. My Grass Farm and its developers remain the source of record — we never invent a code, mechanic, or update. Facts above trace to the official Roblox description (cut grass → hay → cash → blades → workers), the Roblox API, and dated creator videos." />
-        <p className="mt-4 text-sm leading-7 text-white/70">Changes only count if they come from the official Roblox game page or a dated source. Anything we cannot date or source is labeled as unconfirmed rather than guessed. The source status page is our ledger.</p>
+        <SectionHeader eyebrow="Sources" title="How we know this" copy="Everything here comes from the game's official description, the Roblox API, or a dated creator video — not guesses. When something is only community-reported, it's labeled that way." />
+        <p className="mt-4 text-sm leading-7 text-white/70">Where a mechanic comes from matters: the hay → cash → blades → workers loop is from the official description, while the codes are community-reported. The sources page logs what was checked and when.</p>
       </section>
 
       <section className="mt-10">
@@ -81,6 +80,7 @@ export default function WikiPage() {
       </section>
 
       <AdsterraArticleBottom />
+      <div className="mt-12"><VerificationBox /></div>
     </main>
   );
 }

@@ -108,7 +108,7 @@ export const topicClusters: TopicCluster[] = [
     currentAnswer: "No confirmed public codes as of the latest refresh; check the official Roblox/YouTube channels for drops.",
     verificationBoundary: "A code is listed only with a dated official source; unverified codes are marked, never presented as active.",
     sections: [
-      { eyebrow: "Status", title: "Verified codes", body: "The active list, or an honest empty state." },
+      { eyebrow: "Status", title: "Verified codes", body: "The codes that work now: RELEASE and MERCHANT." },
       { eyebrow: "Watch", title: "Where codes drop", body: "Official Roblox page and YouTube announcements." }
     ],
     faqs: [

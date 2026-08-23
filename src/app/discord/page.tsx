@@ -14,7 +14,7 @@ export default function DiscordPage() {
     <main className="mx-auto max-w-7xl px-4 py-10">
       <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Discord status", href: "/discord" }]} />
       <Breadcrumbs items={[{ label: "Discord status", href: "/discord" }]} />
-      <PageIntro eyebrow="My Grass Farm · Community" title="Official Discord invite status" description="An honest status page: we publish a Discord invite only when we verify it from a dated official source." />
+      <PageIntro eyebrow="My Grass Farm · Community" title="Official Discord invite status" description="The official My Grass Farm Discord invite, when one is available." />
       <section className="mt-10">
         <SectionHeader
           eyebrow="Status"
