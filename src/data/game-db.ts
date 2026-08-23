@@ -92,13 +92,17 @@ export const gameGenre = "Tycoon";         // official genre_l2, games API 2026-
 export const gameGenreL1 = "Simulation";
 export const gameCreator = "One More Grass";   // group creator
 export const gameCreatedIso = "2026-07-23";
-export const gameUpdatedIso = "2026-08-23";
+export const gameUpdatedIso = "2026-08-24";
 export const gamePlaceId = "98073123711869";
 export const gameUniverseId = "10553807383";
-export const gameVisits = 798505;          // games API 2026-08-23
-export const gamePlaying = 2633;           // games API 2026-08-23
-export const gameFavorites = 3616;
+export const gameVisits = 830266;          // games API 2026-08-24
+export const gamePlaying = 3192;           // games API 2026-08-24
+export const gameFavorites = 3759;
 
 export function getGameEntity(slug: string) {
   return gameEntities.find((e) => e.slug === slug);
 }
+
+export const gameUpVotes = 6307;           // games API votes 2026-08-24
+export const gameDownVotes = 272;          // games API votes 2026-08-24
+export const gameRatingPct = Math.round((gameUpVotes / (gameUpVotes + gameDownVotes)) * 100);

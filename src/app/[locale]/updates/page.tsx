@@ -39,9 +39,9 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
     crumb: isEs ? "Actualizaciones" : "Updates",
     introTitle: isEs ? "Actualizaciones de My Grass Farm" : "My Grass Farm updates",
     introDesc: isEs
-      ? "My Grass Farm cambia seguido, pero casi nunca publica notas de parche oficiales. Aquí te decimos dónde se anuncian los cambios y cómo darte cuenta si algo de verdad cambió — sin inventar notas."
-      : "My Grass Farm changes often, but it rarely publishes official patch notes. Here's where changes get announced and how to tell if something actually changed — without making anything up.",
-    howEyebrow: isEs ? "Cómo verificamos" : "How we verify",
+      ? "My Grass Farm cambia seguido, pero casi nunca publica notas de parche oficiales. Aquí te decimos dónde se anuncian los cambios y cómo darte cuenta si algo de verdad cambió — sin inventar notas de parche ni fechas."
+      : "My Grass Farm changes often, but it rarely publishes official patch notes. Here's where changes get announced and how to tell if something actually changed — without making up patch notes or dates.",
+    howEyebrow: isEs ? "Qué cuenta" : "What counts",
     howT: isEs ? "Qué contamos como actualización real" : "What counts as a real update",
     howB: isEs ? [
       "Cambios en la página oficial del juego en Roblox (fecha de última actualización, descripción).",
@@ -75,9 +75,14 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
     ],
     honestEyebrow: isEs ? "Honestidad" : "Honesty",
     honestT: isEs ? "Lo que no publicamos" : "What we don't publish",
+    confirmedEyebrow: isEs ? "Cambios confirmados" : "Confirmed changes",
+    confirmedT: isEs ? "Lo que sí sabemos que cambió" : "What we know changed",
+    confirmedB: isEs
+      ? `A ${gameUpdatedIso}, la descripción oficial del juego incluye una línea sobre trabajadores offline: "recuerda, tus agricultores cortan césped mientras no estás en línea". Es una señal confirmada de cómo funciona la automatización. Aparte de eso, al ser un juego tan nuevo (creado ${gameCreatedIso}), la historia de parches aún es corta — no hay una lista larga de cambios. Cuando aparezca una actualización confirmada, esta sección la listará con su fuente.`
+      : `As of ${gameUpdatedIso}, the game's official description carries a line about offline workers: "remember, your farmers cut grass while you're offline." That is a confirmed signal of how the automation works. Beyond that, because the game is so new (created ${gameCreatedIso}), its patch history is still short — there is no long list of changes. When a confirmed update lands, this section will list it with its date and source.`,
     honestB: isEs
       ? "No listamos cambios que no podamos fechar ni confirmar. Si un video de creador menciona algo pero otra fuente fechada no lo confirma, lo marcamos como 'sin confirmar' en lugar de publicado. De la misma manera, no inventamos fechas ni números específicos. Cuando una actualización confirmada aparezca, la añadiremos aquí con su fuente fechada."
-      : "We don't list changes we can't date or confirm. If a creator video mentions something but another dated source doesn't confirm it, we mark it 'unconfirmed' rather than published. Likewise, we don't invent dates or specific numbers. When a confirmed update appears, we'll add it here with its dated source.",
+      : "We don't list changes we can't date or confirm. If a creator video mentions something but another dated source doesn't confirm it, we mark it 'unconfirmed' rather than published. Likewise, we don't invent dates or specific numbers. When a confirmed update appears, we'll add it here with its dated source, so this page stays a real record rather than a guess.",
     faqEyebrow: isEs ? "Preguntas frecuentes" : "FAQ",
     faq1q: isEs ? "¿Cómo sé que un cambio es real?" : "How do I know a change is real?",
     faq1a: isEs ? "Solo contamos cambios de la página oficial de Roblox o de videos fechados de creadores, y normalmente de más de una fuente. Si no lo podemos fechar, lo dejamos fuera." : "We only count changes from the official Roblox page or dated creator videos, usually from more than one source. If we can't date it, we leave it out.",
@@ -101,7 +106,6 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
       <FaqJsonLd items={[{ q: T.faq1q, a: T.faq1a }, { q: T.faq2q, a: T.faq2a }, { q: T.faq3q, a: T.faq3a }]} />
       <Breadcrumbs items={[{ label: T.crumb, href: `${prefix}/updates` }]} />
       <PageIntro eyebrow="My Grass Farm · Updates" title={T.introTitle} description={T.introDesc} />
-      <VerificationBox />
       <VideoGuide
         eyebrow={isEs ? "Creadores" : "Creators"}
         title={isEs ? "Video de la comunidad" : "Community code & gameplay evidence"}
@@ -119,6 +123,16 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
       <AdsterraArticleMid />
       <section className="mt-10">
         <SectionHeader eyebrow={T.whereEyebrow} title={T.whereT} copy={T.whereB} />
+        <div className="mt-4 grid gap-3 text-sm text-white/75">
+          <a href="https://www.roblox.com/games/98073123711869/My-Grass-Farm" target="_blank" rel="noreferrer" className="row-link">
+            <span><strong>{isEs ? "Página oficial del juego" : "Official game page"}</strong><small>{isEs ? "El título, el género y la disponibilidad viven aquí." : "The game's title, genre, and availability live here."}</small></span>
+            <span aria-hidden="true">-&gt;</span>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=roblox+my+grass+farm" target="_blank" rel="noreferrer" className="row-link">
+            <span><strong>{isEs ? "Búsqueda en YouTube" : "YouTube search"}</strong><small>{isEs ? "Donde aparecen los videos nuevos de creadores y los anuncios." : "Where new creator videos and announcements surface."}</small></span>
+            <span aria-hidden="true">-&gt;</span>
+          </a>
+        </div>
       </section>
 
       <section className="mt-10">
@@ -134,6 +148,10 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
       </section>
 
       <section className="mt-10">
+        <SectionHeader eyebrow={T.confirmedEyebrow} title={T.confirmedT} copy={T.confirmedB} />
+      </section>
+
+      <section className="mt-10">
         <SectionHeader eyebrow={T.honestEyebrow} title={T.honestT} copy={T.honestB} />
       </section>
 
@@ -143,6 +161,7 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
           <p><strong className="text-white">{T.faq1q}</strong> {T.faq1a}</p>
           <p><strong className="text-white">{T.faq2q}</strong> {T.faq2a}</p>
           <p><strong className="text-white">{T.faq3q}</strong> {T.faq3a}</p>
+          <p><strong className="text-white">{isEs ? "¿Qué sigue?" : "What comes next?"}</strong> {isEs ? "Este juego crece rápido: ~830K visitas en su primer mes. Cada actualización puede mover la economía de la granja, así que vuelve a esta página cada vez que el juego se actualice." : "This game is growing fast: ~830K visits in its first month. Each update can shift the farm economy, so check back here whenever the game updates."}</p>
         </div>
       </section>
 

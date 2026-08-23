@@ -7,13 +7,19 @@ import { monthLabel, siteConfig } from "@/data/site";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
-import { gameGenre, gameCreator, gameVisits, gamePlaying, gameCreatedIso, gameUpdatedIso, farmSystems } from "@/data/game-db";
+import { gameGenre, gameCreator, gameVisits, gamePlaying, gameCreatedIso, gameUpdatedIso, gameFavorites, gameUpVotes, gameDownVotes, gameRatingPct, farmSystems } from "@/data/game-db";
 import { AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 export const dynamicParams = false;
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+function monthName(mm: string) {
+  const i = parseInt(mm, 10) - 1;
+  return MONTHS[i] ?? mm;
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -34,6 +40,9 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
   if (locale !== "en" && locale !== "es") notFound();
   const isEs = locale === "es";
   const prefix = locale === "es" ? "/es" : "/en";
+  // Derive the display date from the single source of truth — never hand-write it.
+  const [cY, cM, cD] = gameCreatedIso.split("-");
+  const createdDisplay = isEs ? `${cD}/${cM}/${cY}` : `${cD} ${monthName(cM)} ${cY}`;
   const T = {
     crumb: isEs ? "Fecha de lanzamiento" : "Release date",
     introTitle: isEs ? "Fecha de lanzamiento de My Grass Farm" : "My Grass Farm release date",
@@ -43,13 +52,13 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
     boxEyebrow: isEs ? "Datos oficiales" : "Official data",
     boxTitle: isEs ? "Fecha, género y popularidad" : "Date, genre, and popularity",
     boxItems: isEs ? [
-      ["Fecha de creación", `31 de julio de 2026 (${gameCreatedIso}, API de Roblox).`],
+      ["Fecha de creación", `${createdDisplay} (${gameCreatedIso}, API de Roblox).`],
       ["Género oficial", `${gameGenre} (según la API de Roblox, genre_l2).`],
       ["Creador", gameCreator],
       ["Popularidad", `~${(gameVisits/1000).toFixed(0)}K visitas, ~${gamePlaying} jugando (${gameUpdatedIso}).`],
       ["Plataforma", "Roblox (juego dentro de la plataforma)."]
     ] : [
-      ["Created date", `31 July 2026 (${gameCreatedIso}, Roblox API).`],
+      ["Created date", `${createdDisplay} (${gameCreatedIso}, Roblox API).`],
       ["Official genre", `${gameGenre} (games API, genre_l2).`],
       ["Creator", gameCreator],
       ["Popularity", `~${(gameVisits/1000).toFixed(0)}K visits, ~${gamePlaying} playing (${gameUpdatedIso}).`],
@@ -72,6 +81,27 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
       : `Released ${gameCreatedIso}, My Grass Farm is a very recent Roblox game. It has already reached ~${(gameVisits/1000).toFixed(0)}K visits in its first weeks — a fast start for a ${gameGenre}. As a young game it changes fast: each update may adjust blade prices, hay production, and workers, and this wiki updates as changes are confirmed.`,
     relatedEyebrow: isEs ? "Contexto" : "Context",
     relatedT: isEs ? "¿A qué se parece?" : "What is it similar to?",
+    ratingEyebrow: isEs ? "Comunidad" : "Community",
+    ratingT: isEs ? "Cómo lo valoran los jugadores" : "How players rate it",
+    ratingB: isEs
+      ? `La API oficial de Roblox registra ${gameUpVotes.toLocaleString()} votos a favor y ${gameDownVotes.toLocaleString()} en contra (~${gameRatingPct}% positivos) al ${gameUpdatedIso}. Son votos reales de la comunidad, no una estimación. Una ratio así de positiva es típica de un tycoon casual bien recibido.`
+      : `The official Roblox API records ${gameUpVotes.toLocaleString()} up-votes and ${gameDownVotes.toLocaleString()} down-votes (~${gameRatingPct}% positive) as of ${gameUpdatedIso}. These are real community votes, not an estimate. A ratio this positive is typical of a well-received casual tycoon.`,
+    growthEyebrow: isEs ? "Crecimiento" : "Growth",
+    growthT: isEs ? "Cuánto ha crecido" : "How it has grown",
+    growthB: isEs
+      ? `En menos de un mes, My Grass Farm pasó de cero a ~${(gameVisits/1000).toFixed(0)}K visitas, ~${gamePlaying.toLocaleString()} jugando ahora mismo y ${gameFavorites.toLocaleString()} favoritos (API de Roblox, ${gameUpdatedIso}). La fecha de creación (${gameCreatedIso}) y estos números juntos responden "cuándo salió y cómo le está yendo".`
+      : `In under a month, My Grass Farm went from zero to ~${(gameVisits/1000).toFixed(0)}K visits, ~${gamePlaying.toLocaleString()} playing right now, and ${gameFavorites.toLocaleString()} favorites (Roblox API, ${gameUpdatedIso}). The created date (${gameCreatedIso}) plus these numbers answer "when it came out and how it is doing."`,
+    timelineEyebrow: isEs ? "Línea de tiempo" : "Timeline",
+    timelineT: isEs ? "Hitos desde el lanzamiento" : "Milestones since launch",
+    timelineRows: isEs ? [
+      ["23 de julio de 2026", "El juego se crea en Roblox (fecha oficial de la API)."],
+      ["22 de agosto de 2026", "Aparecen los primeros videos de códigos de la comunidad (RELEASE y MERCHANT)."],
+      ["23–24 de agosto de 2026", "El juego supera ~800K visitas; la descripción oficial añade el detalle de los trabajadores offline."],
+    ] : [
+      ["23 July 2026", "The game is created on Roblox (official API created date)."],
+      ["22 August 2026", "The first community codes videos surface (RELEASE and MERCHANT)."],
+      ["23–24 August 2026", "The game passes ~800K visits; the official description carries the offline-workers detail."],
+    ],
     relatedB: isEs
       ? "My Grass Farm encaja en el nicho de tycoon de granja de Roblox, similar en espíritu a otros 'idle tycoon': cortas césped, conviertes heno en dinero y reinviertes en velocidad y automatización. No es un juego de combate competitivo. Verifica la página oficial para el contenido exacto actual."
       : "My Grass Farm fits Roblox's farm-tycoon niche, similar in spirit to other idle tycoons: you cut grass, turn hay into cash, and reinvest in speed and automation. It is not a competitive combat game. Check the official page for the exact current content.",
@@ -114,6 +144,26 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
 
       <section className="mt-10">
         <SectionHeader eyebrow={T.roleEyebrow} title={T.roleT} copy={T.roleB} />
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={T.ratingEyebrow} title={T.ratingT} copy={T.ratingB} />
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={T.growthEyebrow} title={T.growthT} copy={T.growthB} />
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={T.timelineEyebrow} title={T.timelineT} />
+        <div className="mt-4 grid gap-3">
+          {T.timelineRows.map((row: string[]) => (
+            <div key={row[0]} className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{row[0]}</strong>
+              <p className="mt-1 text-sm text-white/65">{row[1]}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <AdsterraArticleMid />

@@ -4,12 +4,12 @@ import { monthLabel, siteConfig } from "@/data/site";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
-import { gameGenre, gameCreator, gameEntities } from "@/data/game-db";
+import { gameGenre, gameCreator, gameEntities, offlineNote, gameVisits, gamePlaying, gameUpdatedIso } from "@/data/game-db";
 import { AdsterraArticleBottom, AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
 export const metadata: Metadata = {
-  title: `${siteConfig.gameName} Guides — Grow Your Farm · ${monthLabel}`,
-  description: `My Grass Farm guides: cut grass, collect hay, process it for cash, unlock blades, hire workers, and track codes and updates.`,
+  title: `${siteConfig.gameName} Guides — Grow Faster & Spend Smarter · ${monthLabel}`,
+  description: `My Grass Farm progression guides: what to upgrade first, how to maximize hay income, and the offline-worker trick that earns cash while you're away.`,
   alternates: { canonical: `${siteConfig.domain}/guides` }
 };
 
@@ -18,52 +18,59 @@ export default function GuidesPage() {
     <main className="mx-auto max-w-7xl px-4 py-10">
       <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }]} />
       <FaqJsonLd items={[
-        { q: "What is the fastest way to start in My Grass Farm?", a: "Enter the game and start cutting grass. The official loop is cut grass → collect hay → process for cash → unlock blades → hire workers. The how-to-play guide walks the first day." },
-        { q: "What should a new player upgrade first?", a: "The blade. Blades raise hay-per-second, which is the whole economy — faster cutting means more hay, more cash, and quicker growth." },
-        { q: "What are blades and workers for?", a: "Blades cut faster (raising income) and workers harvest automatically. Both scale the farm economy; blades matter early, workers add idle growth." },
-        { q: "Are there active codes?", a: "Yes — RELEASE and MERCHANT are the codes the community reports right now. See the codes page for how to redeem them." }
+        { q: "What should I upgrade first in My Grass Farm?", a: "The blade. A faster blade raises hay-per-second, which lifts every downstream step (hay → cash → more blades and workers). Workers come second — they add automation and, notably, keep farming while you're offline." },
+        { q: "Do workers keep farming when I'm offline?", a: "Yes. The official description confirms workers cut grass while you're offline, so hiring workers gives you always-on income — a key reason workers are worth the cash early." },
+        { q: "Is there a fastest way to earn cash?", a: "The loop is the strategy: keep both the blade and workers growing together. Blades raise active cutting speed; workers add passive/offline income. Skipping workers to only buy blades caps your growth." },
       ]} />
       <Breadcrumbs items={[{ label: "Guides", href: "/guides" }]} />
-      <PageIntro eyebrow="My Grass Farm · Guides" title="My Grass Farm Guides" description={`How to play ${siteConfig.gameName} from scratch: start cutting grass, grow your hay into cash, and unlock blades and workers to grow faster.`} />
+      <PageIntro eyebrow="My Grass Farm · Guides" title="Grow faster & spend smarter" description={`Beyond the first day: what to upgrade first, how the blade + worker loop compounds, and the offline-income trick most new players miss. Grounded in the official description, not invented numbers.`} />
       <AdsterraArticleTop />
 
       <section className="mt-10">
-        <SectionHeader eyebrow="First" title="Start by cutting grass" copy="My Grass Farm is an incremental farm tycoon. The official loop is: cut grass → collect hay 🌱 → process hay for cash 💸 → unlock powerful blades 🗡️ → hire workers 🧑‍🌾 → expand your farm 🏡. Your first session is about feeling that loop: cutting grass builds your hay income, hay becomes cash, and cash buys the upgrades that make you faster. Start by cutting, then reinvest in a blade."
-/>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <Link href="/en/how-to-play" className="content-card"><strong>How to play</strong><p className="mt-1 text-sm text-white/60">The full first-day farm loop: hay, cash, blades, workers.</p></Link>
-          <Link href="/en/codes" className="content-card"><strong>Redeem codes</strong><p className="mt-1 text-sm text-white/60">The codes that work now: RELEASE and MERCHANT.</p></Link>
-        </div>
-      </section>
-
-      <section className="mt-10">
-        <SectionHeader eyebrow="Economy" title="Grow your farm, piece by piece" copy={`The farm is made of pieces, each with a farm job. Build the income first (hay and cash), then reinvest in blades (speed) and workers (automation). Here's the roster from the official description:`} />
+        <SectionHeader eyebrow="Priorities" title="What to upgrade first" copy={`There is no published price table the developers have shared, so we won't invent one. What the official loop makes clear is the order of value: the blade is the engine. A faster blade means more hay per second, which means more cash, which means more upgrades. So early on, reinvest in the blade before piling cash into anything else.`} />
         <div className="mt-4 grid gap-3 text-sm text-white/75">
           {gameEntities.map((e) => (
             <div key={e.slug} className="rounded-lg border border-white/10 bg-black/20 p-4">
-              <strong className="text-white">{e.name}</strong> <span className="text-white/50">({e.farmJob})</span>
+              <strong className="text-white">{e.name}</strong> <span className="text-white/50">— {e.farmJob}</span>
               <p className="mt-1 text-white/65">{e.blurb}</p>
             </div>
           ))}
         </div>
       </section>
 
+      <section className="mt-10">
+        <SectionHeader eyebrow="Idle income" title="The offline-worker trick" copy={offlineNote.blurb} />
+        <p className="mt-4 text-sm leading-7 text-white/75">
+          {`This is the single most useful thing to know about ${siteConfig.gameName}: workers earn while you're away. The official description says it directly — "your farmers cut grass while you're offline." That means workers are not a luxury; they are the passive-income layer. A new player who only buys blades is leaving cash on the table every minute they're not playing. Hire workers early, and treat them as part of the core loop, not an afterthought.`}
+        </p>
+      </section>
+
       <AdsterraArticleMid />
 
       <section className="mt-10">
-        <SectionHeader eyebrow="Track" title="Keep current with updates & codes" copy="As a recent, fast-changing game, staying current matters. The updates page tracks real changes, and the codes page reports only verified rewards — never invented code strings." />
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <Link href="/en/updates" className="content-card"><strong>Updates</strong><p className="mt-1 text-sm text-white/60">What changed in the latest My Grass Farm update.</p></Link>
-          <Link href="/en/codes" className="content-card"><strong>Codes</strong><p className="mt-1 text-sm text-white/60">The codes that work now: RELEASE and MERCHANT.</p></Link>
+        <SectionHeader eyebrow="FAQ" title="Quick answers" />
+        <div className="mt-4 grid gap-3 text-sm text-white/75">
+          <p><strong className="text-white">What should I upgrade first?</strong> — The blade. It raises hay-per-second, which lifts every other step. Workers come second for the offline income.</p>
+          <p><strong className="text-white">Do workers farm while I'm offline?</strong> — Yes, the official description confirms it. That's why workers are worth hiring early, not late.</p>
+          <p><strong className="text-white">Is there a fastest way to earn cash?</strong> — Grow the blade and workers together. Blades raise active speed, workers add passive income; skipping one caps your growth.</p>
         </div>
       </section>
 
       <section className="mt-10">
-        <SectionHeader eyebrow="Where to go next" title="Explore the wiki" copy="The wiki hub ties everything together — what the game is, the hay/cash/blade/worker farm economy, codes, and our honest sourcing policy. Use it as your map of the whole resource." />
+        <SectionHeader eyebrow="Strategy" title="The blade + worker compounding loop" copy={`${siteConfig.gameName} is a compounding economy: the blade raises active income, and workers add passive income — and both feed back into more of each. The growth path is not "max one, ignore the other" but "grow both together." Cut grass to build hay, process hay into cash, and split each cash chunk between a faster blade and one more worker. That balance is what turns a slow start into a growing farm.`} />
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow="Track" title="The numbers that tell the story" copy={`As of ${gameUpdatedIso}, the official API shows ~${(gameVisits/1000).toFixed(0)}K visits and ~${gamePlaying.toLocaleString()} playing — a fast start for a ${gameGenre} from ${gameCreator}. These are live numbers, and they're why the "grow both" loop matters: the game is competitive enough that efficient reinvestment is the difference between a slow grind and a compounding farm.`} />
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow="Where to go next" title="Deepen the loop" copy="You have the strategy. Now go deeper on the specific pieces." />
         <div className="mt-4 grid gap-3">
-          <Link href="/wiki" className="row-link"><span><strong>Wiki hub</strong><small>The full map: what My Grass Farm is, how to grow, codes, and updates.</small></span><span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/sources" className="row-link"><span><strong>Source status</strong><small>Our ledger of what's verified and when for each claim.</small></span><span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/en/release-date" className="row-link"><span><strong>Release date</strong><small>When My Grass Farm launched and its early growth.</small></span><span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/en/how-to-play" className="row-link"><span><strong>How to play</strong><small>The first-day route, step by step.</small></span><span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/en/codes" className="row-link"><span><strong>Codes</strong><small>RELEASE and MERCHANT, and how to redeem them.</small></span><span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/en/updates" className="row-link"><span><strong>Updates</strong><small>What changed and where updates get announced.</small></span><span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/wiki" className="row-link"><span><strong>Wiki hub</strong><small>The full map of My Grass Farm.</small></span><span aria-hidden="true">-&gt;</span></Link>
         </div>
       </section>
 

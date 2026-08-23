@@ -79,10 +79,39 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
     watchBody: isEs
       ? "Los nuevos suelen salir dentro del juego o en los anuncios del creador (One More Grass). Desconfía de webs que prometen 'todos los códigos' sin fecha — muchas son de estafa. Funcionan los que dan una fuente real."
       : "New ones usually drop in-game or on the creator's (One More Grass) announcements. Beware sites promising 'all codes' with no date — many are scams. The ones worth using give a real source.",
+    rewardsTitle: isEs ? "Qué dan estos códigos" : "What these codes give",
+    rewardsBody: isEs
+      ? "Los videos que reportan RELEASE y MERCHANT no detallan la recompensa exacta de cada uno, así que no lo inventamos. Lo típico en un tycoon de granja como este es una ayuda inicial: algo de dinero, heno o un empujón para empezar. La caja de recompensas del juego te mostrará el premio real al canjear."
+      : "The videos reporting RELEASE and MERCHANT don't spell out each code's exact reward, so we won't invent it. Typical for a farm tycoon like this is a starter boost: some cash, hay, or a head-start. The in-game reward box shows the real prize when you redeem. As a very new game (launched 23 July 2026), its code cadence is still forming — early codes tend to be small launch-appreciation rewards, not big giveaways.",
+    sourcesTitle: isEs ? "De dónde salen estos códigos" : "Where these codes come from",
+    sourcesIntro: isEs
+      ? "Cada código va ligado a un video de la comunidad con fecha. Ninguno lo ha confirmado todavía un anuncio oficial del juego."
+      : "Each code traces to a dated community video. None is yet confirmed by an official in-game announcement.",
+    sourceRows: [
+      { code: "RELEASE", src: "MY GRASS FARM CODES (0jim8W_7URc), 22 Aug 2026", note: isEs ? "Video de códigos de la comunidad" : "Community codes video" },
+      { code: "MERCHANT", src: "MY GRASS FARM CODES (0jim8W_7URc), 22 Aug 2026", note: isEs ? "Video de códigos de la comunidad" : "Community codes video" },
+      { code: "RELEASE + MERCHANT", src: "МОЯ ТРАВЯНАЯ ФЕРМА КОДЫ (9V7FZBetPXo), 22 Aug 2026", note: isEs ? "Segundo video, refuerza los mismos códigos" : "Second video, cross-confirms the same codes" },
+    ],
     nextTitle: isEs ? "Después de canjear el código" : "After you redeem",
     nextCopy: isEs
       ? "Con la recompensa en mano, toca crecer la granja."
       : "Reward in hand, time to grow the farm.",
+    spotTitle: isEs ? "Cómo detectar webs de códigos falsas" : "How to spot a fake codes site",
+    spotBody: isEs
+      ? "Muchas webs prometen 'todos los códigos 2026' con cadenas inventadas para atraer clics. Señales de alarma: sin fecha, sin fuente, códigos como 'FREEMONEY999' que ningún video respalda, o un muro de 'expiró ayer' con docenas de entradas. La regla que usamos aquí: un código solo entra con una fuente fechada (video o anuncio oficial)."
+      : "Plenty of sites promise 'all 2026 codes' with made-up strings to farm clicks. Warning signs: no date, no source, strings like 'FREEMONEY999' that no video backs, or a wall of 'expired yesterday' entries. The rule here: a code only goes up with a dated source (a video or an official announcement).",
+    faqTitle: isEs ? "Preguntas frecuentes" : "Frequently asked",
+    faqs: isEs ? [
+      ["¿Los códigos caducan?", "Sí, suelen durar poco. Si RELEASE o MERCHANT fallan, probablemente ya vencieron."],
+      ["¿Hay más códigos además de estos?", "Por ahora los videos de la comunidad solo reportan RELEASE y MERCHANT. No añadimos cadenas sin una fuente."],
+      ["¿Los códigos dan Robux?", "No. Los códigos dan recompensas dentro del juego (empujón inicial), no Robux ni dinero real."],
+      ["¿Dónde los canjeo?", "Dentro del juego, en el panel de recompensas (tienda o ajustes). La página 'cómo canjear' de arriba lo detalla."],
+    ] : [
+      ["Do codes expire?", "Yes, they are usually short-lived. If RELEASE or MERCHANT fails, it has likely already expired."],
+      ["Are there more codes than these?", "For now the community videos only report RELEASE and MERCHANT. We don't add strings without a source."],
+      ["Do codes give Robux?", "No. Codes give in-game rewards (a starter boost), not Robux or real money."],
+      ["Where do I redeem them?", "In-game, in the rewards panel (shop or settings). The 'how to redeem' steps above detail it."],
+    ],
   };
 
   const links = [
@@ -95,7 +124,7 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
       <BreadcrumbJsonLd items={[{ name: isEs ? "Inicio" : "Home", href: `${prefix}/` }, { name: T.crumb, href: `${prefix}/codes` }]} />
-      <FaqJsonLd items={faqs.codes} />
+      <FaqJsonLd items={T.faqs.map((f: string[]) => ({ q: f[0], a: f[1] }))} />
       <ClaimReviewJsonLd claim={`${siteConfig.gameName} reward codes are redeemed in-game; the codes listed here are community-reported.`} itemReviewed={{ name: siteConfig.gameName, type: "VideoGame" }} author={{ name: `${siteConfig.gameName} Wiki` }} datePublished={checkedDate} rating={{ ratingValue: 3, bestRating: 5, worstRating: 1, alternateName: "Community-reported" }} />
       <Breadcrumbs items={[{ label: T.crumb, href: `${prefix}/codes` }]} />
       <PageIntro eyebrow="My Grass Farm · Codes" title={T.introTitle} description={T.introDesc} />
@@ -150,6 +179,49 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
       <section className="mt-10">
         <SectionHeader eyebrow={isEs ? "Novedades" : "Freshness"} title={T.watchTitle} />
         <p className="mt-4 text-sm leading-7 text-white/75">{T.watchBody}</p>
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Recompensas" : "Rewards"} title={T.rewardsTitle} />
+        <p className="mt-4 text-sm leading-7 text-white/75">{T.rewardsBody}</p>
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Fuentes" : "Sources"} title={T.sourcesTitle} copy={T.sourcesIntro} />
+        <div className="mt-4 overflow-hidden rounded-lg border border-white/10">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-black/30 text-white/60">
+              <tr>
+                <th className="px-4 py-2 font-semibold">{isEs ? "Código" : "Code"}</th>
+                <th className="px-4 py-2 font-semibold">{isEs ? "Fuente" : "Source"}</th>
+                <th className="px-4 py-2 font-semibold">{isEs ? "Nota" : "Note"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {T.sourceRows.map((r) => (
+                <tr key={r.code + r.src} className="border-t border-white/10">
+                  <td className="px-4 py-2 font-mono text-[color:var(--accent)]">{r.code}</td>
+                  <td className="px-4 py-2 text-white/70">{r.src}</td>
+                  <td className="px-4 py-2 text-white/55">{r.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Advertencia" : "Heads-up"} title={T.spotTitle} />
+        <p className="mt-4 text-sm leading-7 text-white/75">{T.spotBody}</p>
+      </section>
+
+      <section className="mt-10">
+        <SectionHeader eyebrow="FAQ" title={T.faqTitle} />
+        <div className="mt-4 grid gap-3 text-sm text-white/75">
+          {T.faqs.map((f) => (
+            <p key={f[0]}><strong className="text-white">{f[0]}</strong> — {f[1]}</p>
+          ))}
+        </div>
       </section>
 
       <AdsterraArticleMid />

@@ -21,7 +21,7 @@ export default function WikiPage() {
         { q: "What is My Grass Farm?", a: `A ${gameGenre} on Roblox by ${gameCreator}: you cut grass, collect hay, process it for cash, unlock blades, and hire workers to expand your farm.` },
         { q: "Is it a combat game?", a: "No — it's an incremental farm tycoon. The official loop is cut grass → hay → cash → blades → workers → farm expansion, not combat." },
         { q: "What are hay, cash, blades, and workers?", a: "Hay is the base resource you collect by cutting grass; cash comes from processing hay; blades cut faster; workers automate harvesting. This split is straight from the official description." },
-        { q: "How do I get codes?", a: "We list only codes we can verify from an official source. If none are confirmed, the codes page says so honestly." },
+        { q: "How do I get codes?", a: "The community currently reports RELEASE and MERCHANT as active codes (creator-tested, not officially confirmed). See the codes page for how to redeem them." },
         { q: "When did My Grass Farm launch?", a: "My Grass Farm was created 23 July 2026 per the official Roblox API. See the release date page for details." }
       ]} />
       <Breadcrumbs items={[{ label: "Wiki", href: "/wiki" }]} />
@@ -30,7 +30,7 @@ export default function WikiPage() {
 
       <section className="mt-10">
         <SectionHeader eyebrow="What it is" title="A farm tycoon you grow by cutting grass" copy={`My Grass Farm is a ${gameGenre} on Roblox by ${gameCreator}. The official description sums the loop up: "Cut grass to collect hay 🌱, process hay for cash 💸, unlock powerful blades to cut faster 🗡️, hire workers to farm for you 🧑‍🌾, upgrade and expand your farm 🏡." It is an incremental farm economy — you turn grass into cash and reinvest it in speed and automation.`} />
-        <p className="mt-4 rounded-lg border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/75">It is not a combat game: the focus is the farm tycoon loop and growing it over time. As a recent game (released 23 July 2026) it changes fast, and this wiki updates as changes are confirmed rather than guessing patch notes.</p>
+        <p className="mt-4 rounded-lg border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/75">It is not a combat game: the focus is the farm tycoon loop and growing it over time. One thing that surprises new players: hired workers keep cutting grass even while you're offline, so workers are an always-on income layer, not just active-session helpers. As a recent game (released 23 July 2026) it changes fast, and this wiki updates as changes are confirmed rather than guessing patch notes.</p>
       </section>
 
       <section className="mt-10">
