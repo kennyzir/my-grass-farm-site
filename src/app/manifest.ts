@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "My Grass Farm Wiki · Colony Building",
+    name: "My Grass Farm Wiki · Farm Tycoon",
     short_name: "My Grass Farm",
     description: "Focused My Grass Farm fan wiki: codes, how to play, codes, release date, and updates.",
     start_url: "/",

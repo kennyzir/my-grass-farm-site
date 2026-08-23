@@ -147,7 +147,7 @@ export function VideoGameJsonLd() {
         url: siteConfig.domain,
         applicationCategory: "Game",
         operatingSystem: "Any",
-        genre: "Colony Sim",
+        genre: "Tycoon",
         publisher: {
           "@type": "Organization",
           name: `${siteConfig.gameName} Fan Wiki`
