@@ -166,6 +166,18 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
+      <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Luego" : "Next"} title={isEs ? "Ahora juega" : "Now go play"}>
+          <p className="mt-3 text-sm leading-7 text-white/75">
+            {isEs ? (
+              <>Sabiendo <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">cómo se juega el bucle de granja</Link>, canjea los <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">códigos RELEASE y MERCHANT</Link> y sigue <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">lo que cambia</Link> en este juego en crecimiento.</>
+            ) : (
+              <>Now you know <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">how the farm loop plays</Link>, redeem the <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">RELEASE and MERCHANT codes</Link>, and track <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">what changes</Link> in this growing game.</>
+            )}
+          </p>
+        </SectionHeader>
+      </section>
+
       <AdsterraArticleMid />
 
       <section className="mt-10">

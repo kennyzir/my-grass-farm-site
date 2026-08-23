@@ -156,6 +156,18 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
       </section>
 
       <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Luego" : "Next"} title={isEs ? "Sigue jugando" : "Keep playing"}>
+          <p className="mt-3 text-sm leading-7 text-white/75">
+            {isEs ? (
+              <>Mientras esperas la próxima actualización, repasa <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">cómo aprovechar el bucle de granja</Link>, canjea los <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">códigos vigentes</Link>, y revisa <Link href={`${prefix}/release-date`} className="font-semibold text-[color:var(--accent)] hover:underline">el historial del juego</Link>.</>
+            ) : (
+              <>While you wait for the next update, brush up on <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">making the most of the farm loop</Link>, redeem the <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">current codes</Link>, and review <Link href={`${prefix}/release-date`} className="font-semibold text-[color:var(--accent)] hover:underline">the game's history</Link>.</>
+            )}
+          </p>
+        </SectionHeader>
+      </section>
+
+      <section className="mt-10">
         <SectionHeader eyebrow={T.faqEyebrow} title={T.faq1q} />
         <div className="mt-4 grid gap-3 text-sm text-white/75">
           <p><strong className="text-white">{T.faq1q}</strong> {T.faq1a}</p>

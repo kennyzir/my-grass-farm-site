@@ -187,6 +187,18 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Luego" : "Next"} title={isEs ? "Sigue con la granja" : "Next up: the farm"}>
+          <p className="mt-3 text-sm leading-7 text-white/75">
+            {isEs ? (
+              <>Canjea el código y ponte a crecer la granja. Aprende el <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">bucle de cortar césped → heno → dinero</Link> desde cero, o mira <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">qué ha cambiado en el juego</Link> para no perderte nada.</>
+            ) : (
+              <>Redeem the code and get growing. Learn the <Link href={`${prefix}/how-to-play`} className="font-semibold text-[color:var(--accent)] hover:underline">cut grass → hay → cash loop</Link> from scratch, or check <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">what's changed in the game</Link> so you don't miss a thing.</>
+            )}
+          </p>
+        </SectionHeader>
+      </section>
+
+      <section className="mt-10">
         <SectionHeader eyebrow={isEs ? "Fuentes" : "Sources"} title={T.sourcesTitle} copy={T.sourcesIntro} />
         <div className="mt-4 overflow-hidden rounded-lg border border-white/10">
           <table className="w-full text-left text-sm">

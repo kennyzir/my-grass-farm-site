@@ -185,6 +185,18 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
       </section>
 
       <section className="mt-10">
+        <SectionHeader eyebrow={isEs ? "Siguiente" : "Next"} title={isEs ? "Pega el impulso" : "Keep the momentum"}>
+          <p className="mt-3 text-sm leading-7 text-white/75">
+            {isEs ? (
+              <>Con el bucle dominado, canjea los <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">códigos RELEASE y MERCHANT</Link> para un empujón, mira <Link href={`${prefix}/release-date`} className="font-semibold text-[color:var(--accent)] hover:underline">desde cuándo existe el juego</Link>, y sigue <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">los cambios recientes</Link> para adaptarte.</>
+            ) : (
+              <>With the loop down, redeem the <Link href={`${prefix}/codes`} className="font-semibold text-[color:var(--accent)] hover:underline">RELEASE and MERCHANT codes</Link> for a boost, check <Link href={`${prefix}/release-date`} className="font-semibold text-[color:var(--accent)] hover:underline">when the game launched</Link>, and track <Link href={`${prefix}/updates`} className="font-semibold text-[color:var(--accent)] hover:underline">recent changes</Link> to stay ahead.</>
+            )}
+          </p>
+        </SectionHeader>
+      </section>
+
+      <section className="mt-10">
         <SectionHeader eyebrow={T.faqEyebrow} title={T.faq1q} />
         <div className="mt-4 grid gap-3 text-sm text-white/75">
           <p><strong className="text-white">{T.faq1q}</strong> {T.faq1a}</p>

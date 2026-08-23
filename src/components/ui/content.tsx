@@ -25,17 +25,20 @@ export function PageIntro({
 export function SectionHeader({
   eyebrow,
   title,
-  copy
+  copy,
+  children
 }: {
   eyebrow: string;
   title: string;
   copy?: string;
+  children?: ReactNode;
 }) {
   return (
     <div>
       <span className="mini-label">{eyebrow}</span>
       <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white md:text-4xl">{title}</h2>
       {copy ? <p className="mt-3 max-w-3xl text-base leading-7 text-white/64">{copy}</p> : null}
+      {children ? <div className="mt-3 max-w-3xl text-base leading-7 text-white/64">{children}</div> : null}
     </div>
   );
 }

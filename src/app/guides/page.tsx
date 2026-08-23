@@ -57,7 +57,12 @@ export default function GuidesPage() {
       </section>
 
       <section className="mt-10">
-        <SectionHeader eyebrow="Strategy" title="The blade + worker compounding loop" copy={`${siteConfig.gameName} is a compounding economy: the blade raises active income, and workers add passive income — and both feed back into more of each. The growth path is not "max one, ignore the other" but "grow both together." Cut grass to build hay, process hay into cash, and split each cash chunk between a faster blade and one more worker. That balance is what turns a slow start into a growing farm.`} />
+        <SectionHeader eyebrow="Strategy" title="The blade + worker compounding loop">
+          <p className="mt-3 text-sm leading-7 text-white/75">
+            {`${siteConfig.gameName} is a compounding economy: the blade raises active income, and workers add passive income — and both feed back into more of each. The growth path is not "max one, ignore the other" but "grow both together." Cut grass to build hay, process hay into cash, and split each cash chunk between a faster blade and one more worker. That balance is what turns a slow start into a growing farm.`}{" "}
+            Never played the loop before? Start with the <Link href="/en/how-to-play" className="font-semibold text-[color:var(--accent)] hover:underline">how-to-play first-day route</Link>, and grab the <Link href="/en/codes" className="font-semibold text-[color:var(--accent)] hover:underline">RELEASE and MERCHANT codes</Link> to kick-start your first farm.
+          </p>
+        </SectionHeader>
       </section>
 
       <section className="mt-10">
