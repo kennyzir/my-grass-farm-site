@@ -5,7 +5,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { locales } from "@/i18n/locales";
 import { activeCodes, faqs, officialLinks, siteConfig } from "@/data/site";
 import { homepageContract } from "@/data/homepage-contract";
-import { gameGenre, gameCreator, gameEntities, gameUpdatedIso, offlineNote } from "@/data/game-db";
+import { gameGenre, gameCreator, gameEntities, gameUpdatedIso, gameVisits, gamePlaying, offlineNote } from "@/data/game-db";
 import { VideoGameJsonLd, FaqJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { SectionHeader } from "@/components/ui/content";
 import { BrandHero } from "@/components/home/BrandHero";
@@ -66,6 +66,27 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
             ? `My Grass Farm es un ${gameGenre} de Roblox por ${gameCreator}. Aquí decides el orden de mejoras de tu primera hora y creces la granja sin estancarte.`
             : `My Grass Farm is a Roblox ${gameGenre} by ${gameCreator}. Here you decide your first-hour upgrade order and grow the farm without stalling.`}
         />
+      </section>
+
+      {/* Live game data — entity identity + freshness signal (from single source of truth) */}
+      <section className="border-y border-white/10 bg-black/25">
+        <div className="mx-auto grid max-w-7xl gap-px px-4 py-5 sm:grid-cols-3">
+          <div className="bg-white/[0.03] px-4 py-4">
+            <div className="text-2xl font-bold text-[color:var(--accent)]">{(gamePlaying / 1000).toFixed(1)}K</div>
+            <div className="mt-1 text-sm font-semibold text-white">{isEs ? "Jugando ahora" : "Playing now"}</div>
+            <div className="mt-1 text-sm text-white/60">{isEs ? "API oficial de Roblox, en vivo" : "Official Roblox API, live"}</div>
+          </div>
+          <div className="bg-white/[0.03] px-4 py-4">
+            <div className="text-2xl font-bold text-[color:var(--accent)]">{(gameVisits / 1000).toFixed(0)}K</div>
+            <div className="mt-1 text-sm font-semibold text-white">{isEs ? "Visitas totales" : "Total visits"}</div>
+            <div className="mt-1 text-sm text-white/60">{isEs ? "API oficial de Roblox" : "Official Roblox API visits"}</div>
+          </div>
+          <div className="bg-white/[0.03] px-4 py-4">
+            <div className="text-2xl font-bold text-[color:var(--accent)]">{gameGenre}</div>
+            <div className="mt-1 text-sm font-semibold text-white">{isEs ? "Género" : "Genre"}</div>
+            <div className="mt-1 text-sm text-white/60">{isEs ? "Tycoon de granja" : "Farming tycoon"}</div>
+          </div>
+        </div>
       </section>
 
       {/* ★ MAIN ENGINE — the first-hour decision route (the page's reason to exist) */}
