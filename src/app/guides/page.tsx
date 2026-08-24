@@ -4,6 +4,7 @@ import { monthLabel, siteConfig } from "@/data/site";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
+import { MainEngineBacklink } from "@/components/ui/MainEngineBacklink";
 import { gameGenre, gameCreator, gameEntities, offlineNote, gameVisits, gamePlaying, gameUpdatedIso } from "@/data/game-db";
 import { AdsterraArticleBottom, AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
@@ -81,6 +82,7 @@ export default function GuidesPage() {
 
       <AdsterraArticleBottom />
       <div className="mt-12"><VerificationBox /></div>
+      <MainEngineBacklink />
     </main>
   );
 }

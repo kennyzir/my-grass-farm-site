@@ -7,6 +7,7 @@ import { monthLabel, siteConfig } from "@/data/site";
 import { BreadcrumbJsonLd, FaqJsonLd, HowToJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
+import { MainEngineBacklink } from "@/components/ui/MainEngineBacklink";
 import { PlayQuickRules, VideoGuide, DataTable } from "@/components/ui/EvomonBlocks";
 import { PerPageLinks } from "@/components/ui/PerPageLinks";
 import { gameEntities, farmSystems, gameGenre, gameCreator } from "@/data/game-db";
@@ -225,6 +226,7 @@ export default async function HowToPlayPage({ params }: { params: Promise<{ loca
           },
         ]}
       />
+      <MainEngineBacklink isEs={isEs} prefix={prefix} />
     </main>
   );
 }

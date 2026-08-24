@@ -7,6 +7,7 @@ import { activeCodes, checkedDate, expiredCodes, faqs, monthLabel, siteConfig } 
 import { BreadcrumbJsonLd, ClaimReviewJsonLd, FaqJsonLd, HowToJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader, TrustNote } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
+import { MainEngineBacklink } from "@/components/ui/MainEngineBacklink";
 import { AdsterraArticleMid } from "@/components/ads";
 
 export function generateStaticParams() {
@@ -254,6 +255,7 @@ export default async function CodesPage({ params }: { params: Promise<{ locale: 
       <div className="mt-12">
         <VerificationBox note={isEs ? "códigos reportados por la comunidad, no confirmados oficialmente" : "community-reported codes, not officially confirmed"} />
       </div>
+      <MainEngineBacklink isEs={isEs} prefix={prefix} />
     </main>
   );
 }

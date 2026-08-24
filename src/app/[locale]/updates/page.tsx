@@ -8,6 +8,7 @@ import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader, TrustNote } from "@/components/ui/content";
 import { PlayQuickRules, VideoGuide } from "@/components/ui/EvomonBlocks";
 import { VerificationBox } from "@/components/ui/VerificationBox";
+import { MainEngineBacklink } from "@/components/ui/MainEngineBacklink";
 import { gameGenre, gameCreator, gameUpdatedIso, gameVisits, gamePlaying, gameCreatedIso, farmSystems } from "@/data/game-db";
 import { AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
@@ -186,6 +187,7 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
         </div>
       </section>
       <div className="mt-12"><VerificationBox note="tracked against the official Roblox page" /></div>
+      <MainEngineBacklink isEs={isEs} prefix={prefix} />
     </main>
   );
 }
