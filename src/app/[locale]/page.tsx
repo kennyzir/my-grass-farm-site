@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { locales } from "@/i18n/locales";
 import { activeCodes, faqs, officialLinks, siteConfig } from "@/data/site";
 import { homepageContract } from "@/data/homepage-contract";
@@ -10,8 +10,6 @@ import { VideoGameJsonLd, FaqJsonLd, WebSiteJsonLd } from "@/components/seo/Json
 import { SectionHeader } from "@/components/ui/content";
 import { BrandHero } from "@/components/home/BrandHero";
 import { AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
-
-const HOMEPAGE_NS = "homePage";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -44,7 +42,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LocaleHomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: HOMEPAGE_NS });
   if (locale !== "en" && locale !== "es") notFound();
   const prefix = locale === "es" ? "/es" : "/en";
   const isEs = locale === "es";

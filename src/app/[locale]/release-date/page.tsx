@@ -7,6 +7,7 @@ import { monthLabel, siteConfig } from "@/data/site";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs, PageIntro, SectionHeader } from "@/components/ui/content";
 import { VerificationBox } from "@/components/ui/VerificationBox";
+import { MainEngineBacklink } from "@/components/ui/MainEngineBacklink";
 import { gameGenre, gameCreator, gameVisits, gamePlaying, gameCreatedIso, gameUpdatedIso, gameFavorites, gameUpVotes, gameDownVotes, gameRatingPct, farmSystems } from "@/data/game-db";
 import { AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
@@ -210,6 +211,7 @@ export default async function ReleaseDatePage({ params }: { params: Promise<{ lo
         </div>
       </section>
       <div className="mt-12"><VerificationBox note="tracked against the official Roblox page" /></div>
+      <MainEngineBacklink isEs={isEs} prefix={prefix} />
     </main>
   );
 }
