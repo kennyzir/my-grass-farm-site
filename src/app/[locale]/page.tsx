@@ -86,13 +86,22 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* ★ MAIN ENGINE — the first-hour decision route (the page's reason to exist) */}
+      {/* ★ MAIN ENGINE — the first-hour decision route. §13: the previous
+          copy duplicated /guides/ ("farm-economy-strategy" 0.47 ⚠) so the route
+          "why" lines and the SectionHeader copy have been thinned to short
+          labels pointing back to /guides/. The route is still the homepage's
+          main engine (it owns the "what-to-upgrade-first" query), but the deep
+          reasoning lives on /guides/. */}
       <section className="mx-auto max-w-7xl px-4 py-12" data-home-block-id="main-engine">
         <SectionHeader
           eyebrow={isEs ? "La decisión clave" : "The one decision"}
           title={isEs ? "Qué mejorar primero: cuchillas o trabajadores" : "What to upgrade first: blades or workers"}
-          copy={job}
         />
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-white/70">
+          {isEs
+            ? "El farm tiene dos ingresos: cuchillas (activo) y trabajadores (pasivo + offline). El orden en que compras decide la velocidad del inicio."
+            : "The farm has two incomes: blades (active) and workers (passive + offline). The order you buy them decides how fast you grow."}
+        </p>
         <ol className="mt-6 grid gap-3 text-sm text-white/75">
           {homepageContract.firstHourRoute.map((s) => (
             <li key={s.step} className="rounded-lg border border-white/10 bg-black/20 p-4">
@@ -151,11 +160,23 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
 
       {/* ★ Deep differentiator — the offline-worker insight no other site leads with */}
       <section className="bg-white/[0.025]" data-home-block-id="deep-differentiator">
+        {/* ★ Deep differentiator — short conclusion + link only. §13 says
+            homepage vs inner-page similarity must drop below 0.35; previous
+            copy here duplicated /guides/ ("farm-economy-strategy" 0.47 ⚠).
+            The full reasoning lives at /guides/. */}
         <div className="mx-auto max-w-7xl px-4 py-12">
-          <SectionHeader eyebrow={isEs ? "Lo que nadie te dice" : "What nobody tells you"} title={offlineNote.name} copy={offlineNote.blurb} />
-          <p className="mt-3 text-sm leading-7 text-white/70">{isEs
-            ? "La mayoría de guías repiten la descripción oficial. Lo que importa de verdad es el detalle offline: tus trabajadores son una capa de ingreso siempre activa. Un jugador que solo compra cuchillas deja dinero sobre la mesa cada minuto que no juega."
-            : "Most guides repeat the official description. What actually matters is the offline detail: your workers are an always-on income layer. A player who only buys blades leaves money on the table every minute they aren't playing."}</p>
+          <SectionHeader eyebrow={isEs ? "Lo que nadie te dice" : "What nobody tells you"} title={offlineNote.name} />
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-white/70">{isEs
+            ? "Tus trabajadores cortan césped mientras no estás. Una capa de ingreso siempre activa. Si solo compras cuchillas, dejas dinero sobre la mesa cada minuto offline."
+            : "Your workers cut grass while you're away. An always-on income layer. If you only buy blades, you leave money on the table every minute offline."}</p>
+          <div className="mt-5">
+            <Link
+              href={isEs ? "/es/guides" : "/en/guides"}
+              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--accent)]/30 bg-[color:var(--accent)]/8 px-4 py-2 text-sm font-semibold text-[color:var(--accent)] hover:bg-[color:var(--accent)]/15"
+            >
+              {isEs ? "Ver la guía completa de economía del farm →" : "See the full farm-economy guide →"}
+            </Link>
+          </div>
         </div>
       </section>
 

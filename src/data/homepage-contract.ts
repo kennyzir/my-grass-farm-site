@@ -64,10 +64,10 @@ export const homepageContract = {
 
   // The first-hour decision route — the main engine of this homepage
   firstHourRoute: [
-    { step: 1, title: "Cut grass to collect hay", href: "/en/how-to-play", why: "Every farm dollar starts as hay — this is your base income and it's free to start." },
-    { step: 2, title: "Process hay into cash", href: "/en/how-to-play", why: "Cash is the currency of every upgrade; stock it before spending." },
-    { step: 3, title: "Buy your first blade", href: "/guides", why: "A faster blade raises hay-per-second, the engine that feeds everything else." },
-    { step: 4, title: "Hire a worker early", href: "/guides", why: "Workers farm even while you're offline — skipping them leaves cash on the table." },
+    { step: 1, title: "Cut grass to collect hay", href: "/en/how-to-play", why: "Base income — every farm dollar starts here." },
+    { step: 2, title: "Process hay into cash", href: "/en/how-to-play", why: "Cash pays every upgrade." },
+    { step: 3, title: "Buy your first blade", href: "/guides", why: "Fastest step → see the upgrade order at /guides/." },
+    { step: 4, title: "Hire a worker early", href: "/guides", why: "Offline income → full breakdown at /guides/." },
   ],
 
   hubPlan: [
