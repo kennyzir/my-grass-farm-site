@@ -3,15 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { locales } from "@/i18n/locales";
-import { activeCodes, editorialSignals, faqs, guideClusters, heroMetrics, officialLinks, playerJourney, siteConfig, toolCards, videoGuides, wikiCards } from "@/data/site";
-import { editorialSignalsEs, guideClustersEs, heroMetricsEs, officialLinksEs, playerJourneyEs, shortDisclosureEs, videoGuidesEs, valuePropositionEs } from "@/data/home-es";
-import { VideoGuide } from "@/components/ui/EvomonBlocks";
-import { VerificationBox } from "@/components/ui/VerificationBox";
-import { gameGenre, gameCreator, gameUpdatedIso } from "@/data/game-db";
+import { activeCodes, faqs, officialLinks, siteConfig } from "@/data/site";
+import { homepageContract } from "@/data/homepage-contract";
+import { gameGenre, gameCreator, gameEntities, gameUpdatedIso, offlineNote } from "@/data/game-db";
 import { VideoGameJsonLd, FaqJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
-import { SectionHeader, TrustNote } from "@/components/ui/content";
+import { SectionHeader } from "@/components/ui/content";
 import { BrandHero } from "@/components/home/BrandHero";
-import { AdsterraArticleTop } from "@/components/ads";
+import { AdsterraArticleTop, AdsterraArticleMid } from "@/components/ads";
 
 const HOMEPAGE_NS = "homePage";
 
@@ -25,8 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const base = siteConfig.domain;
   if (locale === "es") {
     return {
-      title: "My Grass Farm Códigos, Cómo Jugar y Actualizaciones",
-      description: "Códigos de My Grass Farm, cómo jugar, fecha de lanzamiento y actualizaciones — una wiki de fans enfocada de My Grass Farm.",
+      title: "My Grass Farm: Cómo Jugar, Códigos y Cómo Crecer tu Granja",
+      description: "La guía de My Grass Farm: corta césped → heno → dinero → cuchillas → trabajadores, más códigos y novedades.",
       alternates: {
         canonical: `${base}/es/`,
         languages: { "en-US": `${base}/en/`, es: `${base}/es/`, "x-default": `${base}/en/` }
@@ -47,173 +45,133 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: HOMEPAGE_NS });
-  const ts = await getTranslations({ locale, namespace: "shared" });
   if (locale !== "en" && locale !== "es") notFound();
   const prefix = locale === "es" ? "/es" : "/en";
   const isEs = locale === "es";
   const localHref = (href: string) => (isEs && href.startsWith("/en") ? href.replace("/en", "/es") : href);
 
-  const clusters = isEs ? guideClustersEs : guideClusters;
-  const journey = isEs ? playerJourneyEs : playerJourney;
-  const ol = isEs ? officialLinksEs : officialLinks;
-  const esig = isEs ? editorialSignalsEs : editorialSignals;
-  const vids = isEs ? videoGuidesEs : videoGuides;
-  const metrics = isEs ? heroMetricsEs : heroMetrics;
-  const valueProp = isEs ? valuePropositionEs : siteConfig.valueProposition;
-  const shortDisc = isEs ? shortDisclosureEs : siteConfig.shortDisclosure;
+  const job = isEs ? homepageContract.primaryPlayerJobEs : homepageContract.primaryPlayerJob;
+  const problem = isEs ? homepageContract.problemStateEs : homepageContract.problemState;
 
   return (
     <main>
       <WebSiteJsonLd />
       <VideoGameJsonLd />
       <FaqJsonLd items={faqs.home} />
-      <BrandHero isEs={isEs} valueProp={valueProp} shortDisc={shortDisc} />
+      <section data-home-block-id="hero">
+        <BrandHero
+          isEs={isEs}
+          valueProp={isEs ? "Corta césped → gana dinero → contrata trabajadores" : "Cut grass → earn cash → hire workers"}
+          shortDisc={isEs
+            ? `My Grass Farm es un ${gameGenre} de Roblox por ${gameCreator}. Aquí decides el orden de mejoras de tu primera hora y creces la granja sin estancarte.`
+            : `My Grass Farm is a Roblox ${gameGenre} by ${gameCreator}. Here you decide your first-hour upgrade order and grow the farm without stalling.`}
+        />
+      </section>
 
-      <section className="border-y border-white/10 bg-black/25">
-        <div className="mx-auto grid max-w-7xl gap-px px-4 py-5 sm:grid-cols-3">
-          {metrics.map((m) => (
-            <div key={m.label} className="bg-white/[0.03] px-4 py-4">
-              <div className="text-2xl font-bold text-[color:var(--accent)]">{m.value}</div>
-              <div className="mt-1 text-sm font-semibold text-white">{m.label}</div>
-              <div className="mt-1 text-sm text-white/60">{m.note}</div>
+      {/* ★ MAIN ENGINE — the first-hour decision route (the page's reason to exist) */}
+      <section className="mx-auto max-w-7xl px-4 py-12" data-home-block-id="main-engine">
+        <SectionHeader
+          eyebrow={isEs ? "La decisión clave" : "The one decision"}
+          title={isEs ? "Qué mejorar primero: cuchillas o trabajadores" : "What to upgrade first: blades or workers"}
+          copy={job}
+        />
+        <ol className="mt-6 grid gap-3 text-sm text-white/75">
+          {homepageContract.firstHourRoute.map((s) => (
+            <li key={s.step} className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{s.step}. {s.title}</strong>
+              <p className="mt-1 text-white/65">{s.why}</p>
+              <Link href={localHref(s.href)} className="mt-2 inline-block text-xs font-semibold text-[color:var(--accent)] hover:underline">→ {isEs ? "Leer la guía" : "Read the guide"}</Link>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <AdsterraArticleTop />
+
+      {/* ★ Critical answers — 2-3 directly usable answers */}
+      <section className="bg-white/[0.025]" data-home-block-id="critical-answers">
+        <div className="mx-auto max-w-7xl px-4 py-12">
+          <SectionHeader eyebrow={isEs ? "Rápido" : "Quick answers"} title={isEs ? "Las 3 cosas que todo nuevo jugador pregunta" : "The 3 things every new player asks"} />
+          <div className="mt-6 grid gap-3 text-sm text-white/75">
+            <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{isEs ? "¿Los trabajadores ganan mientras estoy fuera?" : "Do workers earn while I'm offline?"}</strong>
+              <p className="mt-1 text-white/65">{isEs ? "Sí — la descripción oficial lo confirma: 'tus agricultores cortan césped mientras no estás en línea'. Por eso contratar trabajadores pronto vale más de lo que parece." : "Yes — the official description confirms it: 'your farmers cut grass while you're offline.' That's why hiring workers early is worth more than it looks."}</p>
+            </div>
+            <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{isEs ? "¿Qué es mejor, cuchilla o trabajador?" : "Which is better, blade or worker?"}</strong>
+              <p className="mt-1 text-white/65">{isEs ? "No es uno u otro — es un tándem. La cuchilla sube tu corte activo, el trabajador añade ingreso pasivo+offline. Crece ambos juntos." : "It's not one or the other — it's a tandem. The blade raises active cutting, the worker adds passive + offline income. Grow both together."}</p>
+            </div>
+            <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{isEs ? "¿Hay códigos activos?" : "Are there active codes?"}</strong>
+              <p className="mt-1 text-white/65">
+                {activeCodes.length === 0
+                  ? (isEs ? "Ninguno confirmado ahora mismo." : "None confirmed right now.")
+                  : (isEs ? <>La comunidad reporta <code className="font-mono text-[color:var(--accent)]">{activeCodes.map(c => c.code).join(", ")}</code> (sin confirmar oficialmente).</> : <>The community reports <code className="font-mono text-[color:var(--accent)]">{activeCodes.map(c => c.code).join(", ")}</code> (not officially confirmed).</>)}
+                {" "}<Link href={localHref("/en/codes")} className="font-semibold text-[color:var(--accent)] hover:underline">{isEs ? "Ver códigos" : "See codes"}</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ★ Core loop — the whole game in one pass */}
+      <section className="mx-auto max-w-7xl px-4 py-12" data-home-block-id="core-loop">
+        <SectionHeader eyebrow={isEs ? "El bucle" : "The loop"} title={isEs ? "Cómo funciona My Grass Farm" : "How My Grass Farm works"} copy={isEs
+          ? "El bucle oficial lo resume todo: corta césped → recolecta heno 🌱 → procesa heno por dinero 💸 → desbloquea cuchillas para cortar más rápido 🗡️ → contrata trabajadores 🧑‍🌾 → expande tu granja 🏡."
+          : "The official loop sums it all up: cut grass → collect hay 🌱 → process hay for cash 💸 → unlock powerful blades to cut faster 🗡️ → hire workers 🧑‍🌾 → expand your farm 🏡."} />
+        <div className="mt-4 grid gap-3 text-sm text-white/75">
+          {gameEntities.map((e) => (
+            <div key={e.slug} className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <strong className="text-white">{e.name}</strong> <span className="text-white/50">— {e.farmJob}</span>
+              <p className="mt-1 text-white/65">{e.blurb}</p>
             </div>
           ))}
         </div>
       </section>
-      <AdsterraArticleTop />
 
-      {/* Creator evidence — real grass-farm gameplay (yt-content-miner, yt-dlp-verified) */}
-      <section className="mx-auto max-w-7xl px-4 pt-8">
-        <VideoGuide
-          eyebrow={isEs ? "Creadores" : "Creators"}
-          title={isEs ? "Así se juega de verdad" : "Watch real farm gameplay"}
-          description={isEs
-            ? "Los videos de los creadores muestran el bucle real de cortar césped, recolectar heno y subir en la tabla de líderes, más allá de la descripción oficial. Todos los embeds están verificados con yt-dlp."
-            : "Creator videos show the real cutting-grass, collecting-hay loop and leaderboard gameplay beyond the official description. All embeds are yt-dlp-verified."}
-          embedId="5ta1QVhlVM4"
-        />
-      </section>
+      <AdsterraArticleMid />
 
-      {/* Query Router: what are you here to do */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        <SectionHeader eyebrow={t("route_eyebrow")} title={t("route_title")} copy={t("route_copy")} />
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <div className="rounded-lg border border-white/10 bg-black/20 p-5">
-            <span className="mini-label">{t("create_eyebrow")}</span>
-            <h2 className="mt-3 text-lg font-bold text-white">{t("create_title")}</h2>
-            <p className="mt-2 text-sm text-white/70">{t("create_copy")}</p>
-            <Link href={localHref("/en/how-to-play")} className="mt-3 inline-block text-sm font-semibold text-[color:var(--accent)] hover:underline">→ {t("create_title")}</Link>
-          </div>
-          <div className="rounded-lg border border-white/10 bg-black/20 p-5">
-            <span className="mini-label">{t("style_eyebrow")}</span>
-            <h2 className="mt-3 text-lg font-bold text-white">{t("style_title")}</h2>
-            <p className="mt-2 text-sm text-white/70">{t("style_copy")}</p>
-            <Link href={localHref("/en/how-to-play")} className="mt-3 inline-block text-sm font-semibold text-[color:var(--accent)] hover:underline">→ {t("style_title")}</Link>
-          </div>
-          <div className="rounded-lg border border-white/10 bg-black/20 p-5">
-            <span className="mini-label">{t("roleplay_eyebrow")}</span>
-            <h2 className="mt-3 text-lg font-bold text-white">{t("roleplay_title")}</h2>
-            <p className="mt-2 text-sm text-white/70">{t("roleplay_copy")}</p>
-            <Link href={localHref("/en/how-to-play")} className="mt-3 inline-block text-sm font-semibold text-[color:var(--accent)] hover:underline">→ {t("roleplay_title")}</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Codes strip */}
-      <section className="bg-white/[0.025]">
+      {/* ★ Deep differentiator — the offline-worker insight no other site leads with */}
+      <section className="bg-white/[0.025]" data-home-block-id="deep-differentiator">
         <div className="mx-auto max-w-7xl px-4 py-12">
-          <SectionHeader eyebrow="Freshness" title={t("qa_title")} copy={t("qa_copy")} />
-          <div className="mt-6 rounded-lg border border-white/10 bg-black/20 p-5 text-sm text-white/70">
-            {activeCodes.length === 0 ? (
-              <>{t("no_codes", { fallback: "No active codes listed right now." })}</>
-            ) : (
-              activeCodes.map((c) => <div key={c.code}><strong className="text-white">{c.code}</strong> — {c.reward}</div>)
-            )}
-            <Link href={localHref("/en/codes")} className="mt-3 inline-block font-semibold text-[color:var(--accent)] hover:underline">→ {isEs ? "Estado de códigos" : "Codes status"}</Link>
-          </div>
+          <SectionHeader eyebrow={isEs ? "Lo que nadie te dice" : "What nobody tells you"} title={offlineNote.name} copy={offlineNote.blurb} />
+          <p className="mt-3 text-sm leading-7 text-white/70">{isEs
+            ? "La mayoría de guías repiten la descripción oficial. Lo que importa de verdad es el detalle offline: tus trabajadores son una capa de ingreso siempre activa. Un jugador que solo compra cuchillas deja dinero sobre la mesa cada minuto que no juega."
+            : "Most guides repeat the official description. What actually matters is the offline detail: your workers are an always-on income layer. A player who only buys blades leaves money on the table every minute they aren't playing."}</p>
         </div>
       </section>
 
-      {/* New-player pitfalls — what actually slows players down (creator video backed) */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        <SectionHeader
-          eyebrow={isEs ? "Por qué la gente se atasca" : "Where players get stuck"}
-          title={isEs ? "Errores comunes de los nuevos jugadores" : "Common new-player mistakes"}
-          copy={isEs ? "Vistas en videos de jugadores y en la economía del juego; no son teoría de manual." : "Seen in player videos and in the game's economy; this is not manual theory."}
-        />
-        <div className="mt-6 grid gap-3 text-sm text-white/75">
-          <div className="rounded-lg border border-white/10 bg-black/20 p-4">
-            <strong className="text-white">{isEs ? "Ignorar a los trabajadores = pierdes producción offline" : "Ignoring workers = lost offline production"}</strong>
-            <p className="mt-1 text-white/65">{isEs ? "Varios videos de creadores (yt-dlp verificado) confirmaron: tus trabajadores siguen cortando césped aunque estés fuera. Los nuevos que solo compran cuchillas y no contratan trabajadores dejan dinero sobre la mesa cada minuto offline." : "Multiple creator videos (yt-dlp-verified) confirm: your workers keep cutting grass even while you're offline. New players who only buy blades and skip workers leave cash on the table every offline minute."}</p>
-          </div>
-          <div className="rounded-lg border border-white/10 bg-black/20 p-4">
-            <strong className="text-white">{isEs ? "Solo cuchillas, nunca balance" : "Blades only, no balance"}</strong>
-            <p className="mt-1 text-white/65">{isEs ? "El bucle oficial corta césped → heno → dinero → cuchillas + trabajadores es un tándem. Gasto solo en cuchillas sin automatización te frena en el midpoint." : "The official loop cut grass → hay → cash → blades + workers is a tandem. Spending only on blades without automation stalls your mid-game."}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Create / Style / RP guide clusters */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        <SectionHeader eyebrow={t("qa_eyebrow")} title={isEs ? "Guías de My Grass Farm" : "My Grass Farm guides"} copy={isEs ? "Desde cortar tu primer césped hasta subir en la tabla de líderes — elige una ruta." : "From cutting your first grass to climbing the leaderboard — pick a route."} />
-        <div className="mt-6 grid gap-3">
-          {clusters.map((c) => (
-            <Link key={c.href} href={localHref(c.href)} className="row-link">
-              <span><strong>{c.title}</strong><small>{c.description}</small></span>
-              <span aria-hidden="true">-&gt;</span>
+      {/* ★ Task hubs — funnel into the intent matrix by player state */}
+      <section className="mx-auto max-w-7xl px-4 py-12" data-home-block-id="task-hubs">
+        <SectionHeader eyebrow={isEs ? "Tu estado" : "Where are you?"} title={isEs ? "Elige tu situación" : "Pick your situation"} />
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {homepageContract.hubPlan.map((h) => (
+            <Link key={h.target} href={localHref(h.target)} className="rounded-lg border border-white/10 bg-black/20 p-5 hover:border-white/25">
+              <span className="mini-label">{h.playerState}</span>
+              <strong className="mt-2 block text-lg text-white">{h.label}</strong>
+              <p className="mt-1 text-sm text-white/65">{h.nextDecision}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Player journey */}
-      <section className="bg-white/[0.025]">
+      {/* ★ Guide map — the full sitemap of this game's answers */}
+      <section className="bg-white/[0.025]" data-home-block-id="guide-map">
         <div className="mx-auto max-w-7xl px-4 py-12">
-          <SectionHeader eyebrow={isEs ? "Ruta" : "Route"} title={isEs ? "Tu recorrido por My Grass Farm" : "Your My Grass Farm journey"} copy={isEs ? "Canjea, construye, expande y sigue las novedades — en ese orden." : "Redeem, build, expand, then track updates — in that order."} />
-          <div className="mt-6 grid gap-4 lg:grid-cols-2">
-            {journey.map((stage) => (
-              <div key={stage.number} className="rounded-lg border border-white/10 bg-black/20 p-5">
-                <span className="mini-label">{stage.question}</span>
-                <Link href={localHref(stage.href)} className="mt-3 block text-lg font-bold text-white hover:text-[color:var(--accent)]"><span className="mr-2 text-[color:var(--accent)]">{stage.number}.</span>{stage.title}</Link>
-                <p className="mt-2 text-sm text-white/70">{stage.answer}</p>
-                <div className="mt-4 grid gap-2">
-                  {stage.links.map((l) => (
-                    <Link key={l.href} href={localHref(l.href)} className="row-link">
-                      <span><strong>{l.label}</strong><small>{l.description}</small></span>
-                      <span aria-hidden="true">-&gt;</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Sources + EEAT */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        <SectionHeader eyebrow={t("src_eyebrow")} title={t("src_title")} copy={t("src_copy")} />
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          {ol.map((link) => (
-            link.href.startsWith("/") ? (
-              <Link key={link.href} href={localHref(link.href)} className="content-card"><span className="mini-label">{link.miniLabel}</span><h3 className="mt-3 text-lg font-bold text-white">{link.title}</h3><p className="mt-2 text-sm text-white/65">{link.description}</p></Link>
-            ) : (
-              <a key={link.href} href={link.href} className="content-card" target="_blank" rel="noreferrer"><span className="mini-label">{link.miniLabel}</span><h3 className="mt-3 text-lg font-bold text-white">{link.title}</h3><p className="mt-2 text-sm text-white/65">{link.description}</p></a>
-            )
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {esig.map((s) => <TrustNote key={s.title} title={s.title} body={s.body} />)}
-        </div>
-      </section>
-
-      {/* Videos */}
-      <section className="bg-white/[0.025]">
-        <div className="mx-auto max-w-7xl px-4 py-12">
-          <SectionHeader eyebrow={t("video_eyebrow")} title={t("video_title")} copy={t("video_copy")} />
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {vids.map((v) => (
-              <a key={v.href} href={v.href} className="content-card" target="_blank" rel="noreferrer"><span className="mini-label">{v.miniLabel}</span><h3 className="mt-3 text-lg font-bold text-white">{v.title}</h3><p className="mt-2 text-sm text-white/65">{v.description}</p></a>
+          <SectionHeader eyebrow={isEs ? "Mapa" : "Map"} title={isEs ? "Todo lo que cubre esta wiki" : "Everything this wiki covers"} />
+          <div className="mt-6 grid gap-3">
+            {officialLinks.map((link) => (
+              link.href.startsWith("/") ? (
+                <Link key={link.href} href={localHref(link.href)} className="row-link">
+                  <span><strong>{link.title}</strong><small>{link.description}</small></span>
+                  <span aria-hidden="true">-&gt;</span>
+                </Link>
+              ) : (
+                <a key={link.href} href={link.href} className="row-link" target="_blank" rel="noreferrer">
+                  <span><strong>{link.title}</strong><small>{link.description}</small></span>
+                  <span aria-hidden="true">-&gt;</span>
+                </a>
+              )
             ))}
           </div>
         </div>

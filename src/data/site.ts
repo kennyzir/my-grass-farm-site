@@ -1,5 +1,6 @@
 import type { EditorialSignal, FaqItem, GameCode, HeroMetric, LinkCard, PlayerJourneyStage, SiteConfig } from "@/types/site";
 import { gameConfig } from "@/data/game.config";
+import { gameGenre, gameVisits, gamePlaying } from "@/data/game-db";
 
 export const checkedDate = "2026-08-23";
 export const monthLabel = "August 2026";
@@ -59,9 +60,9 @@ export const heroActions = [
 ];
 
 export const heroMetrics: HeroMetric[] = [
-  { value: "1.1K", label: "Playing now", note: "Official Roblox game page, 2026-08-23" },
-  { value: "290K", label: "Total visits", note: "Official Roblox game page visits" },
-  { value: "Tycoon", label: "Genre", note: "Official Roblox genre — farming tycoon / sim" }
+  { value: `${(gamePlaying / 1000).toFixed(1)}K`, label: "Playing now", note: "Official Roblox API, live" },
+  { value: `${(gameVisits / 1000).toFixed(0)}K`, label: "Total visits", note: "Official Roblox API visits" },
+  { value: gameGenre, label: "Genre", note: "Official Roblox genre — farming tycoon" }
 ];
 
 export const activeCodes: GameCode[] = [
